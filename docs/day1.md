@@ -233,6 +233,40 @@ Ngay sau khi tạo:
 `assignee` quyết định **ai làm**.
 `parent` quyết định **khi nào được làm**.
 
+### `--workspace scratch` nghĩa là thư mục nào?
+Trong bài này, coder task đang dùng:
+
+```bash
+--workspace scratch
+```
+
+Điều đó có nghĩa là task **không chạy trực tiếp trong repo benchmark của bạn**.
+Hermes sẽ tạo một thư mục scratch riêng do Kanban quản lý.
+
+Trên máy học của bạn, path thường có dạng:
+
+```text
+~/.hermes/kanban/boards/<board-slug>/workspaces/<task-id>
+```
+
+Nếu bạn vẫn đang dùng board `default`, path cũ thường là:
+
+```text
+~/.hermes/kanban/workspaces/<task-id>
+```
+
+Ví dụ, nếu board là `kanban-agent-team-lab`, coder workspace thường nằm dưới:
+
+```text
+~/.hermes/kanban/boards/kanban-agent-team-lab/workspaces/<task-id>
+```
+
+Vì vậy, khi workspace là `scratch`, bạn phải hiểu rõ:
+- đó là **thư mục làm việc tạm do Hermes tạo**
+- nó **không mặc định là repo TodoApp thật của bạn**
+- nếu bạn muốn task chạy trên repo benchmark thật, hãy dùng `dir:/absolute/path/to/repo`
+- nếu bạn muốn coder có workspace riêng nhưng vẫn bám cùng một repo, hãy dùng `worktree`
+
 ---
 
 ## 8. Step 4 — Quan sát task state thật

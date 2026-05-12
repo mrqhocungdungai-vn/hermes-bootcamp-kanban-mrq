@@ -26,7 +26,7 @@ Project benchmark cố định của khóa học là **TodoApp** với tech stac
 4. Khi có mâu thuẫn, ưu tiên đọc theo thứ tự:
    - `BOOTCAMP-STATUS.md`
    - `docs/todoapp-benchmark.md`
-   - `docs/day1.md`
+   - current lesson file được chỉ ra trong `BOOTCAMP-STATUS.md`
    - `AGENTS.md`
 
 ## Lộ trình hiện tại
@@ -35,6 +35,9 @@ Project benchmark cố định của khóa học là **TodoApp** với tech stac
 - Day 1: hiểu đúng Kanban vs Agent Team vs Goals
 - Day 1 Lab: dựng mini team `pm -> coder -> reviewer` quanh benchmark **TodoApp**
 - Day 1 Goal: tạo được board, profile, task pipeline, và quan sát dispatcher/handoff trên một TodoApp slice nhỏ
+- Day 2: durable handoff artifact và review loop
+- Day 2 Lab: ép reviewer để lại findings cho TodoApp slice ở file review bền vững trong repo/path thật
+- Day 2 Goal: đọc được `context`, phân biệt comment pointer vs source-of-truth file, và tạo follow-up loop từ review artifact
 
 ## File chính
 
@@ -42,7 +45,9 @@ Project benchmark cố định của khóa học là **TodoApp** với tech stac
 - `AGENTS.md` — luật cho Hermes/agents khi tiếp tục viết tài liệu trong repo này
 - `docs/todoapp-benchmark.md` — project benchmark cố định của khóa học
 - `docs/day1.md` — bài học Day 1 để trainee thực hành trên máy khác
-- `log/day1-observations.md` — mẫu log trainee tự điền trong lúc lab
+- `docs/day2.md` — bài học Day 2 về durable handoff artifact và review loop
+- `log/day1-observations.md` — mẫu log trainee tự điền trong lúc lab Day 1
+- `log/day2-observations.md` — mẫu log trainee tự điền trong lúc lab Day 2
 
 ## Cách trainee dùng repo này trên máy học
 
@@ -58,13 +63,16 @@ Sau đó đọc theo thứ tự:
 1. `BOOTCAMP-STATUS.md`
 2. `docs/todoapp-benchmark.md`
 3. `docs/day1.md`
-4. chạy lab đúng checklist
-5. điền `log/day1-observations.md`
+4. chạy lab Day 1 và điền `log/day1-observations.md`
+5. `docs/day2.md`
+6. chạy lab Day 2 và điền `log/day2-observations.md`
 
 ## Learning outcome của pha này
 
-Sau Day 1, trainee phải tự giải thích được:
+Sau Day 2, trainee phải tự giải thích được:
 - Kanban quản lý cái gì
 - Agent Team quản lý cái gì
 - `/goal` khác Kanban ở đâu
 - vì sao `pm -> coder -> reviewer` tốt hơn một agent làm tất cả trong bài lab TodoApp này
+- vì sao reviewer findings nên sống ở file review + comment pointer thay vì chỉ sống trong chat
+- `scratch`, `dir:<repo>`, và artifact durability liên quan với nhau thế nào ở mức nền tảng

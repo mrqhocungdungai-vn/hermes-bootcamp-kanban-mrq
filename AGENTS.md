@@ -40,7 +40,7 @@ Tài liệu trong repo phải phục vụ mục đích:
 8. **Source of truth hiện tại:**
    - `BOOTCAMP-STATUS.md` cho trạng thái
    - `docs/todoapp-benchmark.md` cho benchmark project
-   - `docs/day1.md` cho bài học hiện tại
+   - current lesson file được chỉ ra trong `BOOTCAMP-STATUS.md`
 
 ## Format chuẩn cho lesson docs
 
@@ -80,6 +80,7 @@ Mỗi lesson nên có tối thiểu các mục sau:
 
 Hiện repo đang ở giai đoạn foundation:
 - Day 1 tập trung vào mental model và mini workflow `pm -> coder -> reviewer`
+- Day 2 tập trung vào durable handoff artifact và review loop trên repo/path thật
 - ví dụ và lab phải bám benchmark **TodoApp** thay vì ví dụ generic
 - chưa đi vào multi-project manager pattern
 

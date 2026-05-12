@@ -81,6 +81,7 @@ Mỗi lesson nên có tối thiểu các mục sau:
 Hiện repo đang ở giai đoạn foundation:
 - Day 1 tập trung vào mental model và mini workflow `pm -> coder -> reviewer`
 - Day 2 tập trung vào durable handoff artifact và review loop trên repo/path thật
+- Day 3 tập trung vào chọn đúng workspace `scratch` vs `dir:<repo>` vs `worktree`
 - ví dụ và lab phải bám benchmark **TodoApp** thay vì ví dụ generic
 - chưa đi vào multi-project manager pattern
 

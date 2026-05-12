@@ -38,6 +38,9 @@ Project benchmark cố định của khóa học là **TodoApp** với tech stac
 - Day 2: durable handoff artifact và review loop
 - Day 2 Lab: ép reviewer để lại findings cho TodoApp slice ở file review bền vững trong repo/path thật
 - Day 2 Goal: đọc được `context`, phân biệt comment pointer vs source-of-truth file, và tạo follow-up loop từ review artifact
+- Day 3: chọn đúng workspace `scratch` vs `dir:<repo>` vs `worktree`
+- Day 3 Lab: tạo task mẫu cho cả 3 workspace, inspect resolved path/intended path, và map chúng vào role `pm` / `reviewer` / `coder`
+- Day 3 Goal: hiểu khi nào nên dùng từng workspace cho TodoApp workflow thay vì chọn theo thói quen
 
 ## File chính
 
@@ -46,8 +49,10 @@ Project benchmark cố định của khóa học là **TodoApp** với tech stac
 - `docs/todoapp-benchmark.md` — project benchmark cố định của khóa học
 - `docs/day1.md` — bài học Day 1 để trainee thực hành trên máy khác
 - `docs/day2.md` — bài học Day 2 về durable handoff artifact và review loop
+- `docs/day3.md` — bài học Day 3 về chọn workspace đúng cho workflow TodoApp
 - `log/day1-observations.md` — mẫu log trainee tự điền trong lúc lab Day 1
 - `log/day2-observations.md` — mẫu log trainee tự điền trong lúc lab Day 2
+- `log/day3-observations.md` — mẫu log trainee tự điền trong lúc lab Day 3
 
 ## Cách trainee dùng repo này trên máy học
 
@@ -66,13 +71,17 @@ Sau đó đọc theo thứ tự:
 4. chạy lab Day 1 và điền `log/day1-observations.md`
 5. `docs/day2.md`
 6. chạy lab Day 2 và điền `log/day2-observations.md`
+7. `docs/day3.md`
+8. chạy lab Day 3 và điền `log/day3-observations.md`
 
 ## Learning outcome của pha này
 
-Sau Day 2, trainee phải tự giải thích được:
+Sau Day 3, trainee phải tự giải thích được:
 - Kanban quản lý cái gì
 - Agent Team quản lý cái gì
 - `/goal` khác Kanban ở đâu
 - vì sao `pm -> coder -> reviewer` tốt hơn một agent làm tất cả trong bài lab TodoApp này
 - vì sao reviewer findings nên sống ở file review + comment pointer thay vì chỉ sống trong chat
 - `scratch`, `dir:<repo>`, và artifact durability liên quan với nhau thế nào ở mức nền tảng
+- khi nào `worktree` là đúng lựa chọn cho coding task trên TodoApp repo
+- vì sao chọn sai workspace sẽ làm hỏng handoff hoặc coding flow

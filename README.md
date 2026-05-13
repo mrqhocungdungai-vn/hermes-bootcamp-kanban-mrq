@@ -1,0 +1,116 @@
+# Hermes Bootcamp Kanban MRQ
+
+Khóa học Hermes-first, repo-backed, viết lại từ đầu để bám **tài liệu gốc Hermes Agent** và ưu tiên đúng trục học: **Kanban + agent team + automation**, không trôi sang kiểu học app-first.
+
+## Mục tiêu repo
+
+Repo này dùng để học Hermes theo thứ tự từ **cơ bản -> vận hành -> automation -> agent teams -> builder level**.  
+Benchmark xuyên suốt vẫn là **Todo App** để có ngữ cảnh thực chiến, nhưng trọng tâm là:
+
+1. hiểu Hermes như một hệ điều hành cho agent work,
+2. hiểu khi nào dùng session / profile / skill / memory / cron / delegation / kanban,
+3. dựng được workflow **Jarvis (orchestrator) -> PM -> Coder -> Reviewer** với handoff artifact bền vững trong repo,
+4. tiến tới một **Jarvis orchestrator** có thể điều phối nhiều project bằng Kanban thay vì “mỗi việc một bot riêng”.
+
+## Nguồn gốc khóa học
+
+Tài liệu này được tổ chức lại từ 2 nguồn ưu tiên cao nhất mà bạn yêu cầu đọc trước:
+
+- `https://hermes-agent.nousresearch.com/docs/llms-full.txt`
+- `https://hermes-agent.nousresearch.com/docs/llms.txt`
+
+**Thời điểm ingest:** 2026-05-13 16:42:10 +07  
+**llms-full.txt:** 2332543 bytes, SHA256 `0586901bdecc2e0a5b60853b15405b1813cd3e9b523f653cd7012dfd7c3144bb`  
+**llms.txt:** 17422 bytes, SHA256 `57ba8901c6fef4c8aa6c5dd8f68575b4c526c6eecf24fc1ce68ef831d70ff807`
+
+Xem bản đồ nguồn đầy đủ ở: `docs/reference/hermes-docs-source-map.md`
+
+## Ai nên học repo này
+
+- Người đã cài Hermes nhưng chưa có mental model chắc về session, profile, toolsets, skills, memory.
+- Người muốn học **agent team chuẩn Hermes docs**, đặc biệt là `delegation`, `kanban`, `profiles`, `worktrees`, `cron`, `gateway`.
+- Người muốn chuyển từ “chat với AI” sang “điều hành hệ thống agent có artifact, queue, review, và audit trail”.
+
+## Bắt đầu từ đâu
+
+### Nếu bạn đã cài Hermes rồi
+
+Đọc theo thứ tự này:
+
+1. `BOOTCAMP-STATUS.md`
+2. `docs/index.md`
+3. `docs/levels/level-0-khoi-dong-va-mental-model.md` (skim nhanh)
+4. `docs/levels/level-1-core-operator.md`
+5. `docs/levels/level-4-agent-teams-kanban.md` sau khi xong Level 1-3
+
+### Nếu bạn mới hoàn toàn
+
+Đọc và làm lab theo thứ tự:
+
+1. `docs/levels/level-0-khoi-dong-va-mental-model.md`
+2. `docs/labs/lab-00-day-0-setup.md`
+3. `docs/labs/lab-01-first-chat-sessions.md`
+4. tiếp tục tuần tự qua từng level
+
+## Cấu trúc level
+
+| Level | Trọng tâm | Kết quả đầu ra |
+|---|---|---|
+| 0 | Khởi động + mental model | Biết Hermes là gì, setup/doctor/auth, first chat, session/profile/repo khác nhau ra sao |
+| 1 | Core operator | Dùng CLI/TUI, config, model/provider, toolsets, sessions, security, checkpoints |
+| 2 | Context + skills + memory + profiles | Biết dạy Hermes, nhớ cái gì, nạp context đúng, tách profile/worktree đúng |
+| 3 | Automation + integrations | Chọn đúng trigger primitive, vận hành gateway an toàn, hiểu MCP/ACP/API Server, và thiết kế reliability/cost layers |
+| 4 | Agent teams + Kanban | Thiết kế và chạy team **Jarvis -> PM -> Coder -> Reviewer** bằng board bền vững |
+| 5 | Advanced builder + capstone | Plugin, memory providers, local LLM, Python library, developer internals, capstone |
+
+## Triết lý dạy học của repo này
+
+- **Hermes-first**: học cơ chế Hermes trước, không nhảy ngay vào code app.
+- **Repo-backed**: tri thức nằm trong file, không nằm trong chat transient.
+- **Một concept mỗi lesson**: tránh nhồi nhiều khái niệm gần nhau như model/provider/toolset trong một lúc.
+- **Probe -> Reveal -> Lab -> Feynman check**: luôn có nhịp phát hiện hiểu nhầm rồi mới thực hành.
+- **Artifact-driven teamwork**: reviewer phải để lại artifact bền vững, coder đọc artifact đó để sửa.
+- **Kanban khi cần durability, audit trail, review loop, hoặc multi-profile**; không lạm dụng cho tác vụ nhỏ.
+- **Jarvis làm orchestrator**: course dùng một orchestrator trung tâm để learner dễ hiểu cơ chế route/decompose/dispatch trước khi nhân rộng thành team phức tạp hơn.
+
+## Prerequisites tối thiểu
+
+- Hermes Agent đã cài được (`hermes --version` chạy được)
+- Có ít nhất một provider dùng được (`hermes auth list` hoặc provider trong config)
+- Biết dùng terminal cơ bản
+- Biết Git cơ bản
+- Với các lab nâng cao: nên có Docker và/hoặc gateway environment khi muốn học messaging/backend isolation
+
+## File map
+
+### Entry points
+- `README.md` — entrypoint cấp repo
+- `BOOTCAMP-STATUS.md` — source of truth để resume
+- `docs/index.md` — router theo level / mục tiêu học
+
+### Main curriculum
+- `docs/levels/level-0-khoi-dong-va-mental-model.md`
+- `docs/levels/level-1-core-operator.md`
+- `docs/levels/level-2-context-skills-memory-profiles.md`
+- `docs/levels/level-3-automation-integrations.md`
+- `docs/levels/level-4-agent-teams-kanban.md`
+- `docs/levels/level-5-advanced-builder-capstone.md`
+
+### Labs
+- `docs/labs/lab-00-day-0-setup.md`
+- `docs/labs/lab-01-first-chat-sessions.md`
+- `docs/labs/lab-02-models-tools-skills-memory.md`
+- `docs/labs/lab-02b-context-files-profiles.md`
+- `docs/labs/lab-03-automation-gateway.md`
+- `docs/labs/lab-03b-routing-reliability.md`
+- `docs/labs/lab-04-kanban-pm-coder-reviewer.md`
+- `docs/labs/lab-05-builder-capstone.md`
+
+### Reference
+- `docs/reference/hermes-docs-source-map.md`
+
+## Lưu ý về command trong repo
+
+- Command nào đã được kiểm tra shape trực tiếp trên máy hiện tại sẽ được đánh dấu là **Verified on host** trong file reference.
+- Command nào thuộc flow interactive hoặc flow phụ thuộc môi trường cá nhân sẽ được đánh dấu là **Sourced from Hermes docs**.
+- Repo này không giả vờ rằng mọi command đều đã chạy thành công trong môi trường của learner; thay vào đó, repo phân biệt rõ **đã verify syntax** và **cần learner verify trên máy của mình**.

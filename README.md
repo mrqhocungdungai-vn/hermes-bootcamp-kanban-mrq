@@ -5,7 +5,7 @@ Khóa học Hermes-first, repo-backed, viết lại từ đầu để bám **tà
 ## Mục tiêu repo
 
 Repo này dùng để học Hermes theo thứ tự từ **cơ bản -> vận hành -> automation -> agent teams -> builder level**.  
-Benchmark xuyên suốt vẫn là **Todo App** để có ngữ cảnh thực chiến, nhưng trọng tâm là:
+Benchmark xuyên suốt là **Todo App scenario** để có ngữ cảnh thực chiến, nhưng trọng tâm là:
 
 1. hiểu Hermes như một hệ điều hành cho agent work,
 2. hiểu khi nào dùng session / profile / skill / memory / cron / delegation / kanban,
@@ -37,11 +37,11 @@ Xem bản đồ nguồn đầy đủ ở: `docs/reference/hermes-docs-source-map
 
 Đọc theo thứ tự này:
 
-1. `BOOTCAMP-STATUS.md`
-2. `docs/index.md`
-3. `docs/levels/level-0-khoi-dong-va-mental-model.md` (skim nhanh)
-4. `docs/levels/level-1-core-operator.md`
-5. `docs/levels/level-4-agent-teams-kanban.md` sau khi xong Level 1-3
+1. `docs/index.md`
+2. `docs/levels/level-0-khoi-dong-va-mental-model.md` (skim nhanh)
+3. `docs/levels/level-1-core-operator.md`
+4. `docs/labs/lab-01-first-chat-sessions.md`
+5. tiếp tục theo đúng router trong `docs/index.md`
 
 ### Nếu bạn mới hoàn toàn
 
@@ -81,11 +81,24 @@ Xem bản đồ nguồn đầy đủ ở: `docs/reference/hermes-docs-source-map
 - Biết Git cơ bản
 - Với các lab nâng cao: nên có Docker và/hoặc gateway environment khi muốn học messaging/backend isolation
 
+## Cách thực hành an toàn
+
+Repo này là **curriculum repo**. Bạn có 2 cách thực hành an toàn:
+
+1. **Fork hoặc copy local repo này** nếu bạn muốn làm lab và ghi artifact trực tiếp vào `docs/`.
+2. **Dùng practice repo riêng** nếu bạn muốn áp dụng workflow Hermes/Kanban vào codebase khác.
+
+Lưu ý quan trọng:
+
+- Repo này **chưa bundle sẵn một benchmark app repo thật** cho Todo App end-to-end.
+- Vì vậy, hiện tại hãy hiểu **Todo App** trong course là **scenario minh họa xuyên suốt**.
+- Nếu bạn muốn capstone thực chiến hơn, hãy tự chuẩn bị một practice repo Todo App riêng rồi map workflow của course sang repo đó.
+
 ## File map
 
 ### Entry points
 - `README.md` — entrypoint cấp repo
-- `BOOTCAMP-STATUS.md` — source of truth để resume
+- `BOOTCAMP-STATUS.md` — source of truth để maintainer/contributor resume
 - `docs/index.md` — router theo level / mục tiêu học
 
 ### Main curriculum

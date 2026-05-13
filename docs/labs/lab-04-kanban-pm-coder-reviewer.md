@@ -2,7 +2,8 @@
 
 **Mục tiêu:** dựng một board cơ bản và nhìn thấy rõ workflow **Jarvis -> PM -> Coder -> Reviewer** với dependency, workspace discipline, review artifact, và recovery commands tối thiểu.  
 **Thời lượng:** 45-90 phút.  
-**Quan trọng:** command syntax bên dưới đã được verify; việc chạy end-to-end phụ thuộc profile/model/provider/gateway thực tế của learner.
+**Quan trọng:** command syntax bên dưới đã được verify; việc chạy end-to-end phụ thuộc profile/model/provider/gateway thực tế của learner.  
+**Khuyến nghị thực hành:** làm lab này trên **fork/local copy** của repo course, hoặc map cùng workflow sang một practice repo riêng nếu bạn muốn gắn với code thật.
 
 ## Bước 0 — Preconditions
 
@@ -15,6 +16,8 @@ Bạn cũng cần nhớ 3 rule Level 4:
 1. `dir:<path>` phải là **absolute path**.
 2. `worktree` hợp với coding task hơn shared repo trực tiếp.
 3. Dispatcher chạy **trong gateway mặc định**, nên task `ready` sẽ không tự chạy nếu gateway chưa lên.
+
+**Khuyến nghị thực hành:** làm lab này trên **fork/local copy** của repo course, hoặc thay `BOOTCAMP_REPO` bằng practice repo riêng nếu bạn muốn benchmark chạy trên code thật.
 
 ## Bước 1 — xem command surfaces
 

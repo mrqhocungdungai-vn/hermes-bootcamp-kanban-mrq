@@ -14,8 +14,9 @@ Bắt đầu:
 Bắt đầu:
 1. skim `docs/levels/level-0-khoi-dong-va-mental-model.md`
 2. đọc kỹ `docs/levels/level-1-core-operator.md`
-3. làm `docs/labs/lab-02-models-tools-skills-memory.md`
-4. làm tiếp `docs/labs/lab-02b-context-files-profiles.md`
+3. làm `docs/labs/lab-01-first-chat-sessions.md`
+4. làm tiếp `docs/labs/lab-02-models-tools-skills-memory.md`
+5. rồi `docs/labs/lab-02b-context-files-profiles.md`
 
 ### 3. Tôi muốn học team workflow chuẩn Jarvis -> PM -> Coder -> Reviewer
 Đừng nhảy thẳng ngay. Hãy đọc:
@@ -40,7 +41,10 @@ Bắt đầu:
 
 ## Reading flow chuẩn
 
-`README.md` -> `docs/index.md` -> level doc -> lab doc -> tự chạy trên máy thật -> viết log học tập riêng.
+**Canonical path cho đa số learner:**  
+`README.md` -> `docs/index.md` -> `level-0` -> `lab-00` -> `level-1` -> `lab-01` -> `level-2` -> `lab-02` -> `lab-02b` -> `level-3` -> `lab-03` -> `lab-03b` -> `level-4` -> `lab-04` -> `level-5` -> `lab-05`
+
+Quick path chỉ là **đường tắt có điều kiện**. Nếu bạn thấy mơ hồ ở bất kỳ boundary nào, quay về canonical path.
 
 ## Level map
 
@@ -56,16 +60,20 @@ Bắt đầu:
 ## Quick paths theo mục tiêu
 
 ### Quick path A — Solo operator mạnh hơn
-Level 0 -> Level 1 -> Level 2 -> Lab 02 -> Lab 02B
+**Prereq tối thiểu:** skim Level 0, hoàn thành Lab 01.  
+Đường đi: Level 0 -> Level 1 -> Level 2 -> Lab 02 -> Lab 02B
 
 ### Quick path B — Team assistant / bot cho group
-Level 0 -> Level 1 -> Level 3 -> Lab 03 -> Lab 03B
+**Prereq tối thiểu:** skim Level 0, hiểu Level 1, hoàn thành Lab 01.  
+Đường đi: Level 0 -> Level 1 -> Level 3 -> Lab 03 -> Lab 03B
 
 ### Quick path C — Jarvis orchestrator điều phối nhiều agent
-Level 0 -> Level 1 -> Level 2 -> Lab 02B -> Level 4 -> Lab 04
+**Prereq tối thiểu:** Level 1 + Level 2 + Lab 02B.  
+Đường đi: Level 0 -> Level 1 -> Level 2 -> Lab 02B -> Level 4 -> Lab 04
 
 ### Quick path D — Builder / plugin / internals
-Level 1 -> Level 2 -> Level 3 -> Lab 03B -> Level 5 -> Lab 05
+**Prereq tối thiểu:** Level 1 + Level 2; nên đã xem ít nhất một lab automation.  
+Đường đi: Level 1 -> Level 2 -> Level 3 -> Lab 03B -> Level 5 -> Lab 05
 
 ## Nếu muốn skip level
 

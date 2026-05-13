@@ -1,6 +1,6 @@
-# HERMES BOOTCAMP KANBAN MRQ STATUS — Source of Truth
+# HERMES BOOTCAMP KANBAN MRQ STATUS — Source of Truth for Maintainers
 
-> Đọc file này trước khi tiếp tục viết/chỉnh repo. Đây là snapshot giúp resume sau context compaction hoặc đổi platform.
+> File này dành cho **maintainer/contributor/agent** để resume công việc viết hoặc chỉnh repo. Learner bình thường nên bắt đầu ở `README.md` hoặc `docs/index.md`.
 
 ## 1. Canonical repo
 - Repo path: `/home/mrq-rd/projects/hermes-bootcamp-kanban-mrq`
@@ -44,15 +44,16 @@ Course phải giúp learner đi từ mental model nền tảng tới năng lực
 
 ### Current milestone
 - Authored through: **Level 5 + 8 labs + source map**
-- Current phase/sprint/module: **Curriculum rewrite complete (v1.1) + self-study review pass 01 complete**
+- Current phase/sprint/module: **Curriculum rewrite complete (v1.2) + self-study review pass 01 + editorial pass 02 complete**
 - Next file/day/module to use: `docs/index.md`, sau đó learner chọn Level 0/1 hoặc đi thẳng roadmap phù hợp
 - Framing refinement mới nhất: **Jarvis là orchestrator trung tâm** để learner học route/decompose/dispatch rõ ràng hơn
 - Đã thread lại framing Jarvis xuyên suốt từ Level 0 -> Level 5 và Lab 00 -> Lab 05
 - Self-study progress: **Level 0-5 đã được review xong trong pass 01**
+- Editorial progress: **router, learner-vs-maintainer boundary, và practice guidance đã được review/sync trong pass 02**
 
 ### Not started
 - Chưa có answer key / sample learner logs
-- Chưa có repo con để chạy capstone Todo App end-to-end
+- Chưa bundle một benchmark app repo thật cho Todo App end-to-end; hiện course dùng **scenario minh họa** hoặc learner-provided practice repo
 - Chưa có batch lab riêng cho plugin authoring chi tiết hoặc mini plugin sample end-to-end
 
 ### Review artifacts
@@ -61,7 +62,7 @@ Course phải giúp learner đi từ mental model nền tảng tới năng lực
 ## 5. File map
 ### Entry points
 - `README.md` — mục tiêu repo, cách đọc, level overview
-- `BOOTCAMP-STATUS.md` — source of truth
+- `BOOTCAMP-STATUS.md` — source of truth cho maintainer/contributor
 - `docs/index.md` — router theo level/mục tiêu
 
 ### Main content

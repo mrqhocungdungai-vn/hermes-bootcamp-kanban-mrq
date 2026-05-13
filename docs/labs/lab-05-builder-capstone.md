@@ -2,7 +2,8 @@
 
 **Mục tiêu:** chọn đúng capstone builder/operator nâng cao, và chứng minh bằng command surface + kiến trúc thật từ Hermes docs.  
 **Thời lượng:** 60-90 phút.  
-**Output cuối:** một file brief 1 trang cho capstone bạn chọn.
+**Output cuối:** một file brief 1 trang cho capstone bạn chọn.  
+**Khuyến nghị thực hành:** tạo brief trong **fork/local copy** của repo course, hoặc áp brief đó sang practice repo riêng nếu bạn muốn build tiếp trên codebase thật.
 
 ## Trước khi bắt đầu
 

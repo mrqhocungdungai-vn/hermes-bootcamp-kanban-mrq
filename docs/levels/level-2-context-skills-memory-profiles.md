@@ -86,7 +86,10 @@ Trong team workflow chuẩn:
 - spec/review docs thường vào `dir:/absolute/path/to/repo`.
 
 **Lab**  
-`docs/labs/lab-04-kanban-pm-coder-reviewer.md`
+`docs/labs/lab-02b-context-files-profiles.md`
+
+**Preview sau Level 4:**  
+Sau khi qua `docs/levels/level-4-agent-teams-kanban.md`, bạn quay lại `docs/labs/lab-04-kanban-pm-coder-reviewer.md` để thấy profile/workspace boundary vận hành trong team workflow thật.
 
 **Feynman check**  
 Nếu chỉ tách profile mà không tách workspace, còn rủi ro gì?

@@ -15,7 +15,7 @@ Handoff file cho mọi agent/phiên làm việc tiếp theo trong repo `/home/mr
 ## Non-negotiables
 
 1. **Bám docs gốc Hermes trước**: `llms-full.txt` và `llms.txt` là canonical source cho course framing.
-2. **Hermes-first, app-second**: benchmark Todo App chỉ là sân tập để học workflow, không được nuốt mất trọng tâm Hermes.
+2. **Hermes-first, app-second**: benchmark Todo App là scenario minh họa để học workflow; nếu cần chạy thật, learner phải tự chuẩn bị practice repo.
 3. **Kanban chuẩn hơn**: luôn nhấn mạnh khác biệt giữa `delegate_task`, `kanban`, `cron`, `background terminal`.
 4. **Artifact bền vững**: mọi flow review nên khuyến khích lưu file review trong repo, không chỉ chat prose.
 5. **Giữ router sống**: nếu thêm/chuyển file, cập nhật đồng thời `README.md`, `docs/index.md`, `BOOTCAMP-STATUS.md`.
@@ -46,7 +46,7 @@ Dùng **Todo App** (Next.js + TypeScript + SQLite) làm context chung để minh
 - worktree isolation,
 - Kanban dispatch.
 
-Nhưng benchmark chỉ là nền cho học workflow Hermes.
+Hiện tại đây là **benchmark scenario minh họa** trong curriculum repo. Nếu learner muốn chạy end-to-end trên code thật, hãy dùng fork/local copy hoặc một practice repo riêng.
 
 ## Khi cập nhật repo này
 

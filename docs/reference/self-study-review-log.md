@@ -316,3 +316,38 @@ hermes profile --help
 **Kết luận Level 5:**
 - Level 5 hiện sát docs gốc hơn ở đúng các điểm builder dễ nhầm nhất: chọn sai lớp mở rộng, hiểu sai plugin lifecycle, lẫn library với gateway, và debug nhầm subsystem.
 - Self-study review pass 01 cho toàn bộ Level 0-5 đã hoàn tất.
+
+### Editorial pass 02 — repo coherence review hoàn tất
+**Mục tiêu pass này:**
+- review toàn repo như một biên tập viên khóa học,
+- giảm chỗ learner dễ đi nhầm route,
+- tách rõ file dành cho learner với file dành cho maintainer,
+- làm rõ benchmark scenario vs practice repo thật.
+
+**Repo improvements đã áp dụng:**
+- Cập nhật `README.md` để:
+  - learner bắt đầu từ `docs/index.md` thay vì `BOOTCAMP-STATUS.md`,
+  - thêm mục **Cách thực hành an toàn**,
+  - nói rõ Todo App hiện là **scenario minh họa** trừ khi learner tự chuẩn bị practice repo.
+- Cập nhật `docs/index.md` để:
+  - chốt **canonical path** rõ ràng,
+  - đồng bộ quick paths với prereq tối thiểu,
+  - thêm `lab-01` vào route cho người đã cài Hermes nhưng mental model còn mơ hồ.
+- Cập nhật `BOOTCAMP-STATUS.md` để:
+  - đổi framing sang **Source of Truth for Maintainers**,
+  - nói rõ learner nên bắt đầu ở `README.md` hoặc `docs/index.md`,
+  - đánh dấu pass editorial hiện tại.
+- Cập nhật `docs/levels/level-2-context-skills-memory-profiles.md` để đưa Lesson 2.3 về đúng lab chính là `lab-02b`, còn `lab-04` là preview sau Level 4.
+- Cập nhật `docs/labs/lab-04-kanban-pm-coder-reviewer.md` và `docs/labs/lab-05-builder-capstone.md` để thêm guidance thực hành trên fork/local copy hoặc practice repo riêng.
+- Cập nhật `AGENTS.md` để sync lại non-negotiables và benchmark framing với router mới.
+
+**Editorial findings chính:**
+1. learner route phải thống nhất `README.md -> docs/index.md -> level/lab`,
+2. `BOOTCAMP-STATUS.md` là file maintainer-facing, không phải learner-facing,
+3. Todo App cần được nói rõ là scenario minh họa nếu chưa bundle benchmark repo thật,
+4. Level 2 không nên ép learner nhảy sang Lab 04 quá sớm,
+5. labs có artifact ghi vào repo phải nói rõ khuyến nghị dùng fork/local copy.
+
+**Verification:**
+- Đã re-check markdown links nội bộ: không có broken relative links.
+- Đã sync các file router/handoff chính: `README.md`, `docs/index.md`, `BOOTCAMP-STATUS.md`, `AGENTS.md`.

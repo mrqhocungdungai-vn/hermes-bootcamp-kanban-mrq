@@ -46,6 +46,10 @@ Mỗi chặng học trong repo này phải có đủ **2 phần bổ sung cho nh
    - learner ra objective + guardrails + tiêu chuẩn đầu ra,
    - Jarvis học cách cùng người học làm việc, cùng học, cùng phát triển trên dự án thật.
 
+Boundary viết lab trong repo này:
+- `lab-00` được phép bootstrap-heavy hơn vì đây là bài khởi động.
+- Từ `lab-01` trở đi, lab phải prompt-first thật sự: lý thuyết trong lab giữ rất ngắn, còn giải thích sâu phải sống ở `docs/levels/*`.
+
 Mục tiêu cuối cùng **không** phải để người học cứ lặp lại việc “học lại Hermes từ đầu” mỗi lần mở project mới.  
 Mục tiêu là: **học một lần cho ra mental model đúng, rồi chuyển sang mode giao việc/đồng hành với Jarvis như một orchestrator lâu dài**.
 Sau mỗi chặng, learner nên ép Jarvis giúp mình **đóng gói điều vừa học thành prompt template, checklist, handoff note, hoặc skill draft** để dùng lại lâu dài và có thể chia sẻ cho người đến sau.

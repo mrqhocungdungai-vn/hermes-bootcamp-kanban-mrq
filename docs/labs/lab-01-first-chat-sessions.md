@@ -1,197 +1,102 @@
 # Lab 01 — First Chat và Session Discipline
 
-**Mục tiêu:** dùng được first chat, hiểu session lifecycle, biết khi nào nên mở session mới.  
-**Thời lượng:** 20-30 phút.
+**Mục tiêu:** dùng first chat đúng vai trò, hiểu session lifecycle, và biết khi nào nên mở session mới thay vì tiếp tục transcript cũ.  
+**Thời lượng:** 20-30 phút.  
+**Đọc trước:** `docs/levels/level-1-core-operator.md`
 
 ## Lý thuyết cần nắm
 
-Lab này khóa boundary giữa chat, session, resume/continue, và profile. Mục tiêu không phải thuộc lệnh, mà là hiểu khi nào bạn nên mở hội thoại mới, khi nào nên nối tiếp transcript cũ, và khi nào phải đổi hẳn identity/profile của agent.
+Lab này không dạy bạn thuộc lệnh. Lab này chỉ ép bạn dùng đúng boundary giữa single query, interactive session, resume, và profile. Nếu phần này còn mơ hồ, quay lại Level 1 trước khi làm lab.
 
 ### Sơ đồ mental model
 
 ```text
 [Single query]
-    -> kiểm base chat nhanh
+  -> hỏi nhanh, kiểm base behavior
 
 [Interactive session]
-    -> tạo transcript sống
-    -> dùng slash commands
-    -> save / title / retry / new
+  -> transcript sống cho một workstream
 
-[Resume / continue]
-    -> quay lại đúng session cũ
+[Resume session]
+  -> quay lại đúng workstream cũ
 
 [Profile]
-    -> identity/state riêng, KHÔNG phải session
+  -> identity/state riêng, KHÔNG phải session
 ```
 
-### Bước 1 — xem syntax chat, session, profile
-
-```bash
-hermes chat --help
-hermes sessions list --help
-hermes profile --help
-```
-
-### Bước 2 — chọn interface để vào chat
-
-Quickstart của Hermes cho phép bạn bắt đầu bằng CLI cổ điển hoặc TUI mới:
-
-```bash
-hermes
-hermes --tui
-```
-
-**Mục tiêu:** biết rằng cả hai dùng chung sessions, slash commands, và config; khác nhau chủ yếu ở giao diện.
-
-### Bước 3 — chạy single-query mode (verified syntax, learner tự verify output)
-
-```bash
-hermes chat -q "Giải thích ngắn gọn session khác profile như thế nào trong Hermes? Dùng ví dụ Jarvis orchestrator và coder profile." -Q
-```
-
-**Quan sát:** single-query cho bạn cảm giác Hermes hoạt động mà không cần vào interactive REPL dài.
-
-### Bước 4 — vào interactive session
-
-```bash
-hermes
-```
-
-Khi vào trong session, thử các slash commands sau:
-
-### Verified from Quickstart docs
-
-```text
-/help
-/tools
-/model
-/save
-```
-
-### Sourced from slash-command docs, learner verify live
-
-```text
-/title foundation-lab
-/new
-/retry
-/compress
-```
-
-### Bước 5 — thoát rồi xem session list
-
-```bash
-hermes sessions list --source cli --limit 10
-```
-
-**Mục tiêu quan sát:** bạn phải thấy session mới xuất hiện trong danh sách.
-
-### Bước 6 — resume session
-
-Chọn một session id từ output phía trên rồi chạy:
-
-```bash
-hermes --resume <SESSION_ID>
-```
-
-Hoặc resume gần nhất:
-
-```bash
-hermes --continue
-```
-
-### Bước 7 — nhìn profile riêng, đừng lẫn với session
-
-```bash
-hermes profile show default
-```
-
-**Mục tiêu quan sát:** session bạn vừa tạo có thể thay đổi liên tục, nhưng profile vẫn là lớp identity/state riêng của Hermes.
+Boundary ngắn cần nhớ:
+- Dùng single query khi bạn chỉ cần một câu trả lời nhanh.
+- Dùng interactive session khi công việc cần nhiều lượt trao đổi.
+- Resume khi bạn muốn nối tiếp đúng ngữ cảnh cũ.
+- Đổi profile khi cần identity/config khác, không phải chỉ vì muốn chat mới.
 
 ## Hiểu sai thường gặp
 
-- Session chỉ là cửa sổ chat tạm thời nên không cần quản lý.
-- Profile và session đều là “nơi Hermes nhớ”, nên có thể dùng thay thế nhau.
-- CLI và TUI là hai hệ khác nhau chứ không phải hai interface của cùng session/config system.
+- Session và profile là một.
+- Hễ transcript dài thì phải đổi profile.
+- Single query có thể thay thế hoàn toàn session dài.
 - Resume một session cũ luôn tốt hơn mở session mới.
 
 ## Prompt lab cho Jarvis
 
-Paste trực tiếp prompt dưới đây cho Jarvis. Mục tiêu là bạn giữ vai trò định hướng + review, còn Jarvis giữ vai trò orchestration + execution support.
-
-Mở Hermes Agent rồi paste prompt này để lab thực sự là bài tập cộng tác với Jarvis, không phải chỉ đọc lệnh rồi tự suy luận một mình.
+Paste prompt này cho Jarvis sau khi bạn đã đọc Level 1:
 
 ```text
-Jarvis, hãy làm session coach cho tôi trong Lab 01.
+Jarvis, hãy giúp tôi làm Lab 01 về first chat và session discipline.
 
 Objective:
-- giúp tôi phân biệt chat, session, resume, continue, và profile,
-- buộc tôi dùng Hermes thật để tạo ít nhất một session rồi resume lại,
-- xác nhận tôi đã hiểu khi nào nên mở session mới.
+- Giúp tôi tự phân biệt đúng 4 thứ: single query, interactive session, resume session, profile.
+- Không biến lab này thành tutorial dài về command.
 
 Context:
-- Tôi đang học Lab 01 — First Chat và Session Discipline.
-- Tôi muốn học theo kiểu prompt-first: tôi giữ vai trò learner, bạn giữ vai trò coach.
+- Tôi đã đọc `docs/levels/level-1-core-operator.md`.
+- Tôi đang học cách làm operator đúng boundary trước khi đi tiếp sang level cao hơn.
 
 Guardrails:
-- đừng giải thích quá dài trước khi tôi thực hành,
-- bắt tôi chạy thử ít nhất một single-query và một interactive session,
-- nếu tôi hiểu sai session vs profile thì phải sửa thật ngắn gọn,
-- cuối lab phải kiểm tra lại bằng 3 câu hỏi ngắn.
+- Chỉ dùng giải thích ngắn, không giảng lại cả level.
+- Nếu cần command, chỉ nêu command tối thiểu để tôi tự kiểm trên máy.
+- Luôn nhắc rõ khi nào tôi nên mở session mới, khi nào nên resume, và khi nào profile mới là đúng.
+- Cuối cùng phải để lại một checklist ngắn để tôi dùng lại lần sau.
 
 Deliverables:
-- bằng chứng tôi đã chạy ít nhất 1 single-query và 1 interactive session,
-- một tóm tắt ngắn: session nào vừa được tạo, session nào đã được resume,
-- 3 câu kiểm tra cuối lab để xác nhận tôi thật sự hiểu boundary.
+- Một bảng so sánh ngắn giữa single query / session / resume / profile.
+- 3 tình huống thực tế và quyết định đúng cho mỗi tình huống.
+- Một checklist operator ngắn tên gợi ý: `session-discipline-checklist`.
 
 Quality standard:
-- không dừng ở định nghĩa; phải buộc tôi thao tác thật trên Hermes,
-- phải tách rõ interface (`hermes` / `hermes --tui`) khỏi khái niệm session/profile,
-- nếu tôi trả lời sai boundary thì phải sửa ngay bằng ví dụ ngắn,
-- verdict cuối phải nói rõ tôi pass hay còn mơ hồ ở điểm nào.
+- Mỗi khái niệm phải có boundary rõ ràng.
+- Không được lẫn profile với session.
+- Checklist cuối phải đủ ngắn để dùng lại trước mỗi workstream mới.
+
+Cuối cùng, trả về:
+1. Tóm tắt boundary
+2. 3 tình huống mẫu và quyết định đúng
+3. Checklist tái sử dụng
+4. Điểm nào tôi nên tự kiểm lại bằng Level 1
 ```
 
 ## Kết quả mong đợi
 
-Nếu lab đi đúng hướng, bạn phải nhìn được output đủ cụ thể để tự đối chiếu lại bằng phần lý thuyết vừa học.
+Output tốt sẽ có:
+- giải thích rất ngắn nhưng tách bạch được 4 khái niệm,
+- 3 tình huống mẫu kiểu: hỏi nhanh, bugfix nhiều lượt, quay lại việc cũ,
+- một checklist ngắn có thể dùng lại trước mỗi phiên làm việc.
 
-### Success criteria
-
-- Chạy được một single-query
-- Biết `hermes` và `hermes --tui` đều là hai interface của cùng hệ thống session/config
-- Mở được một interactive session
-- Dùng ít nhất 1 slash command trong session
-- Liệt kê lại được session vừa tạo
-- Resume được một session cũ
-- Giải thích được vì sao `profile` không đồng nghĩa với `session`
-
-### Dấu hiệu cần reject hoặc làm lại
-
-- chỉ có giải thích prose nhưng không có bằng chứng đã tạo/resume session thật
-- output không chỉ rõ bạn cần quan sát gì sau mỗi bước
-- Jarvis làm bạn lẫn giữa interface, session, và profile
-- không có 3 câu kiểm tra cuối lab để buộc bạn tự đánh giá lại
+Dấu hiệu cần làm lại:
+- Jarvis trả lời dài như một lesson mới,
+- không nói rõ khi nào mở session mới,
+- vẫn lẫn session với profile,
+- checklist cuối quá dài hoặc không dùng lại được.
 
 ## Sau lab, từ nay giao gì cho Jarvis
 
-Từ nay, hãy giao cho Jarvis vai trò session coach: gợi ý khi nào nên mở session mới, khi nào nên resume, và khi nào phải đổi profile vì boundary trách nhiệm đã khác. Sau mỗi lần làm việc đáng nhớ, hãy yêu cầu Jarvis rút ra một session-discipline checklist để dùng lại lâu dài.
+Từ nay, trước khi bắt đầu một workstream mới, hãy giao cho Jarvis việc xác định mode làm việc đúng: single query, session mới, hay resume session cũ.
 
-### Prompt đóng gói để dùng lại
+Prompt ngắn để dùng lại:
 
 ```text
-Jarvis, dựa trên lab tôi vừa hoàn thành, hãy làm 4 việc:
-1. Tóm tắt boundary/mental model cốt lõi tôi vừa học bằng tiếng Việt ngắn gọn.
-2. Rút workflow vừa làm thành một prompt template hoặc checklist tái sử dụng.
-3. Chỉ ra 3 pitfalls dễ lặp lại nhất và cách tự kiểm lại output.
-4. Viết một handoff note ngắn để lần sau tôi hoặc người khác có thể dùng lại mà không phải học lại từ đầu.
+Jarvis, với việc tôi sắp làm, hãy quyết định giúp tôi:
+- nên dùng single query, mở session mới, hay resume session cũ,
+- có cần profile khác không,
+- và giải thích ngắn trong 5 dòng vì sao.
 ```
-
-### Reflection
-
-Viết ra 3 tình huống:
-
-1. khi nên mở session mới,
-2. khi nên resume session cũ,
-3. khi nên đổi hẳn profile chứ không chỉ mở session mới.
-
-Gợi ý framing: **Jarvis** có thể giữ nhiều session theo nhiều objective khác nhau, nhưng vẫn là cùng một profile orchestrator; còn `coder` là một profile khác hẳn vì khác identity/tool boundary/trách nhiệm.

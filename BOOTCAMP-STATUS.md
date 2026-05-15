@@ -52,11 +52,11 @@ Course phải giúp learner đi từ mental model nền tảng tới năng lực
 
 ### Current milestone
 - Authored through: **Level 5 + 8 labs + source map**
-- Current phase/sprint/module: **Curriculum rewrite complete (v1.3) + self-study review pass 01 + editorial pass 08 (ASCII mental-model pass) complete**
+- Current phase/sprint/module: **Curriculum rewrite complete (v1.3) + self-study review pass 01 + editorial pass 09 (prompt-first lab boundary fix) complete**
 - Next file/day/module to use: `docs/index.md`, sau đó learner chọn Level 0/1 hoặc đi thẳng roadmap phù hợp
-- Framing refinement mới nhất: **mỗi chặng học phải có 2 phần song hành — lý thuyết sâu theo docs Hermes và lab prompt-first để learner chỉ đạo Jarvis thực hành; đồng thời Level 0-5 đã được chuẩn hóa về fixed format tóm tắt cuối level**
+- Framing refinement mới nhất: **mỗi chặng học phải có 2 phần song hành — lý thuyết sâu theo docs Hermes và lab prompt-first để learner chỉ đạo Jarvis thực hành; riêng `lab-00` là ngoại lệ setup/bootstrap, còn từ `lab-01` trở đi lab phải giữ lý thuyết ngắn và đưa prompt chính lên sớm**
 - Entry framing hiện cũng nói rõ phần `About`: repo này là curriculum repo để học Hermes/Jarvis workflow dài hạn, không phải repo triển khai Todo App production
-- Lab 00/01/02/02B/03/03B/04/05 hiện đều có mục **Prompt test để copy vào Jarvis** ở đầu file để learner thực hành bằng Hermes Agent thật thay vì chỉ đọc prose hoặc chạy checklist command
+- Lab 01/02/02B/03/03B/04/05 đã được refactor về prompt-first boundary: phần lý thuyết ngắn, prompt xuất hiện sớm, và prose giải thích sâu đã được kéo về level docs; `lab-00` vẫn giữ vai setup/bootstrap riêng
 - Jarvis vẫn là orchestrator trung tâm xuyên suốt từ Level 0 -> Level 5 và Lab 00 -> Lab 05
 - ASCII mental model đã được chuẩn hóa thêm trong phần `Lý thuyết cần nắm` của các level/lab để khóa boundary trực quan hơn
 - Self-study progress: **Level 0-5 đã được review xong trong pass 01**

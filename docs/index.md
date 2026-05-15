@@ -18,6 +18,10 @@ Mỗi chặng học luôn có **2 nửa phải đi cùng nhau**:
 2. **Lab docs = phần thực hành prompt-first với Jarvis** để bạn biến lý thuyết thành orchestration thật dưới sự chỉ đạo của mình.
 3. Sau khi lab chạy xong, bạn phải **quay lại đánh giá output bằng lý thuyết vừa đọc**, rồi yêu cầu Jarvis đóng gói lại thành asset tái sử dụng khi phù hợp.
 
+Rule boundary bổ sung:
+- `lab-00` là ngoại lệ setup/bootstrap.
+- Từ `lab-01` trở đi, lab phải giữ phần lý thuyết rất ngắn và đưa prompt thực hành lên sớm; phần giảng sâu nằm ở `docs/levels/*`.
+
 Nếu bỏ một nửa, bạn sẽ bị lệch:
 - chỉ đọc level -> hiểu nhưng khó giao việc bền vững cho Jarvis,
 - chỉ làm lab -> chạy được prompt nhưng không thật sự hiểu để tái dùng lâu dài.

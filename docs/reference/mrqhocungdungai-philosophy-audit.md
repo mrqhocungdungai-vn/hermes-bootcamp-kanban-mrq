@@ -39,12 +39,12 @@ Evidence:
 
 ### 2. Lab không còn bị hiểu như chỉ copy command khô
 Evidence:
-- Tất cả 8 lab hiện đều có mục `Prompt test để copy vào Jarvis` ở đầu file.
+- `lab-00` giữ vai trò setup/bootstrap, còn `lab-01` trở đi đã được refactor theo boundary prompt-first.
 - Ví dụ:
   - `docs/labs/lab-00-day-0-setup.md:7-31`
-  - `docs/labs/lab-02b-context-files-profiles.md:8-32`
-  - `docs/labs/lab-04-kanban-pm-coder-reviewer.md:8-35`
-  - `docs/labs/lab-05-builder-capstone.md:8-32`
+  - `docs/labs/lab-02b-context-files-profiles.md`
+  - `docs/labs/lab-04-kanban-pm-coder-reviewer.md`
+  - `docs/labs/lab-05-builder-capstone.md`
 
 ### 3. Level docs đã hướng learner sang cộng tác dài hạn với Jarvis
 Evidence:
@@ -172,7 +172,7 @@ Thêm framing rõ ở 3 tầng:
 | Lý thuyết đọc để hiểu | Đúng | Đây là điểm mạnh nhất hiện tại |
 | Có sơ đồ ASCII trong lý thuyết | Chưa đạt | Chưa trở thành format bắt buộc |
 | Command nên thử ở phần lý thuyết | Chưa đạt | Commands vẫn đang nặng ở labs |
-| Qua lab thì prompt cho Jarvis là chính | Đúng một phần mạnh | Đã tốt hơn rõ rệt, nhưng labs vẫn còn nhiều control-plane commands |
+| Qua lab thì prompt cho Jarvis là chính | Đúng | `lab-01+` đã được rút về prompt-first boundary; `lab-00` là ngoại lệ bootstrap |
 | Đóng gói thành skill tái sử dụng cả đời | Chưa đạt | Có dạy khái niệm skill nhưng chưa thành ritual bắt buộc |
 | Học để giúp cộng đồng mạnh lên | Chưa đạt | Chưa có framing/community artifact rõ |
 

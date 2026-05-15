@@ -1,278 +1,100 @@
 # Lab 03B — Reliability, Routing, MCP, ACP, API Server
 
-**Mục tiêu:** hiểu các lớp reliability/integration của Hermes để không trộn lẫn `MCP`, `ACP`, `API Server`, `provider routing`, `fallback providers`, `credential pools`, và `auxiliary` models.  
-**Thời lượng:** 35-50 phút.
+**Mục tiêu:** tách đúng các lớp reliability và integration của Hermes để không lẫn provider routing, fallback, auxiliary models, MCP, ACP, và API Server.  
+**Thời lượng:** 35-45 phút.  
+**Đọc trước:** `docs/levels/level-3-automation-integrations.md`
 
 ## Lý thuyết cần nắm
 
-Lab này khóa lớp reliability và integration boundary: provider routing, fallback, auxiliary tasks, MCP, ACP, API Server. Mục tiêu là để bạn nhìn Hermes như một hệ nhiều tầng, nơi cost, reliability, và integration role phải được phân tách rõ ràng.
+Lab này chỉ áp dụng khung reliability/integration của Level 3. Nó không thay Level 3, và không phải nơi để học lại toàn bộ config surface.
 
 ### Sơ đồ mental model
 
 ```text
-Request routing
+[Main provider/model]
+  -> chạy task chính
 
-[Main model/provider]
-        |
-        +--> same-provider issue? -----> [credential pool rotation]
-        |
-        +--> provider outage? ---------> [fallback provider]
-        |
-        +--> task phụ trợ riêng? ------> [auxiliary routing]
+Nếu lỗi cùng provider ------> credential pool / retry strategy
+Nếu outage provider -------> fallback provider
+Nếu task phụ trợ riêng ----> auxiliary model routing
 
-Integration surfaces chạy bên cạnh:
-[MCP = external tools] | [ACP = editor-native agent] | [API Server = OpenAI-compatible backend]
+Bên cạnh đó:
+MCP = external tools
+ACP = editor-native agent bridge
+API Server = OpenAI-compatible serving surface
 ```
 
-### Nguồn đối chiếu chính
-
-- MCP (Model Context Protocol)
-- ACP Editor Integration
-- API Server
-- Provider Routing
-- Fallback Providers
-- Credential Pools
-- Configuration (auxiliary models)
-
-### Verified on host trong lab này
-
-```bash
-hermes mcp --help
-hermes mcp add --help
-hermes mcp list
-hermes acp --help
-hermes fallback --help
-hermes fallback list --help
-hermes auth add --help
-```
-
-### Sourced from docs, chưa verify full flow end-to-end trên host này
-
-- cấu hình MCP server thật rồi kết nối thành công tới một external server cụ thể
-- editor ACP flow đầy đủ với VS Code/Zed/JetBrains
-- API Server exposure cho frontend ngoài
-- fallback chain chạy thật khi provider fail giữa session
-- provider routing với OpenRouter sub-providers trên tài khoản thật
-
-### Bước 1 — nhìn command surfaces trước
-
-Chạy:
-
-```bash
-hermes mcp --help
-hermes mcp add --help
-hermes mcp list
-hermes acp --help
-hermes fallback --help
-hermes fallback list --help
-hermes auth add --help
-```
-
-### Tự quan sát
-
-- command nào thiên về “thêm external capability server”?
-- command nào thiên về “editor integration”?
-- command nào thiên về “resilience chain”?
-- command nào thiên về “credential onboarding”?
-
-### Bước 2 — phân loại 3 kiểu integration
-
-Điền bảng này bằng lời của bạn:
-
-| Nhu cầu | Primitive đúng | Vì sao |
-|---|---|---|
-| Hermes cần dùng tool sống ở server ngoài | ? | ? |
-| Muốn Hermes hiện trong VS Code/Zed/JetBrains | ? | ? |
-| Muốn Open WebUI/LobeChat gọi Hermes như backend | ? | ? |
-
-**Expected answer:**
-- external tool server -> **MCP**
-- editor-native coding agent -> **ACP**
-- OpenAI-compatible backend -> **API Server**
-
-### Bước 3 — hiểu reliability stack bằng 4 tình huống
-
-Ghép từng tình huống với khái niệm đúng nhất:
-
-1. “Tôi có 3 OpenRouter keys, muốn tự xoay vòng để giảm rate-limit.”
-2. “Provider/model chính chết, tôi muốn Hermes tự thử provider:model khác.”
-3. “Tôi dùng OpenRouter và chỉ muốn route qua Anthropic/Google, tránh Together.”
-4. “Vision/compression/web extraction quá đắt vì đang ăn cùng model reasoning chính.”
-
-**Expected mapping:**
-1. credential pools
-2. fallback providers
-3. provider routing
-4. auxiliary model overrides
-
-### Bước 4 — đọc YAML mental model
-
-### 4.1 Credential pool strategy
-
-```yaml
-credential_pool_strategies:
-  openrouter: round_robin
-  anthropic: least_used
-```
-
-Tự giải thích:
-- đây là same-provider rotation hay cross-provider fallback?
-- vì sao nó đứng trước fallback providers trong resilience stack?
-
-### 4.2 Fallback providers
-
-```yaml
-fallback_providers:
-  - provider: openrouter
-    model: anthropic/claude-sonnet-4
-  - provider: anthropic
-    model: claude-sonnet-4
-```
-
-Tự giải thích:
-- đây là cùng provider hay khác provider đều được?
-- nó giải bài toán nào mà credential pool không giải được?
-
-### 4.3 Provider routing (OpenRouter only)
-
-```yaml
-provider_routing:
-  sort: price
-  ignore: ["Together"]
-  require_parameters: true
-  data_collection: deny
-```
-
-Tự giải thích:
-- cấu hình này chỉ có tác dụng khi nào?
-- nó route giữa các **sub-providers bên trong OpenRouter** hay route giữa mọi provider Hermes biết?
-
-### 4.4 Auxiliary models
-
-```yaml
-auxiliary:
-  vision:
-    provider: openrouter
-    model: google/gemini-2.5-flash
-  approval:
-    provider: auto
-  compression:
-    timeout: 120
-```
-
-Tự giải thích:
-- vì sao auxiliary là lớp cost-control quan trọng?
-- `auto` hiện mặc định bám main model hay mặc định tìm model rẻ riêng?
-
-### Bước 5 — MCP thinking
-
-Đọc lại:
-
-```bash
-hermes mcp add --help
-hermes mcp list
-```
-
-Rồi tự trả lời:
-
-- MCP là “Hermes đi gọi tool ngoài” hay “app ngoài gọi Hermes”?
-- khi nào dùng stdio server, khi nào dùng HTTP server?
-- vì sao docs nhấn mạnh per-server filtering?
-
-### Bước 6 — ACP thinking
-
-Đọc lại:
-
-```bash
-hermes acp --help
-```
-
-Tự trả lời:
-
-- ACP có phải chỉ là một chat UI khác không?
-- vì sao docs nói ACP có curated toolset thay vì full mọi tool?
-- working directory trong ACP nên gắn với editor workspace hay với cwd của server process?
-
-### Bước 7 — API Server thinking
-
-Dựa trên docs gốc, tự giải thích bằng 2-3 câu:
-
-- API Server khác gateway ở đâu?
-- API Server khác MCP ở đâu?
-- vì sao frontend như Open WebUI có thể dùng Hermes backend mà vẫn hưởng full agent tool loop?
+Boundary ngắn cần nhớ:
+- Reliability routing và integration surface là hai lớp khác nhau.
+- MCP không phải editor bridge; ACP không phải tool protocol chung; API Server không phải fallback provider.
+- Auxiliary models là routing cho task phụ trợ, không phải mặc định thay model chính.
 
 ## Hiểu sai thường gặp
 
-- MCP, ACP, và API Server đều là một loại integration như nhau.
-- Provider routing chính là fallback cross-provider.
-- Auxiliary auto luôn là lựa chọn rẻ và an toàn nhất.
-- Có thể copy YAML mẫu mà không cần hiểu boundary của từng key.
+- Có fallback provider là đã giải quyết mọi reliability issue.
+- MCP, ACP, và API Server chỉ là ba tên khác nhau của cùng một lớp integration.
+- Auxiliary routing là cách đổi model chính cho nhanh.
+- Provider routing và credential pool là một thứ.
 
 ## Prompt lab cho Jarvis
 
-Paste trực tiếp prompt dưới đây cho Jarvis. Mục tiêu là bạn giữ vai trò định hướng + review, còn Jarvis giữ vai trò orchestration + execution support.
-
 ```text
-Jarvis, hãy làm reliability coach cho tôi trong Lab 03B.
+Jarvis, hãy giúp tôi làm Lab 03B về reliability và integration boundary.
 
 Objective:
-- giúp tôi phân biệt đúng MCP, ACP, API Server, provider routing, fallback providers, credential pools, và auxiliary models,
-- bắt tôi tự giải thích từng lớp reliability/integration bằng ví dụ,
-- kết thúc bằng một mental model ngắn gọn đủ để tôi chọn đúng primitive sau này.
+- Giúp tôi audit cách tôi đang hiểu reliability stack của Hermes.
+- Tạo một routing plan ngắn để tôi dùng lại khi cấu hình hoặc review hệ thống.
 
 Context:
-- Tôi đang học Lab 03B — Reliability, Routing, MCP, ACP, API Server.
-- Tôi muốn học boundary thật chắc thay vì nhớ tên tính năng rời rạc.
+- Tôi đã đọc `docs/levels/level-3-automation-integrations.md`.
+- Tôi muốn tách đúng 6 lớp: provider routing, fallback, auxiliary, MCP, ACP, API Server.
 
 Guardrails:
-- đừng biến lab thành danh sách khái niệm để học thuộc,
-- nếu tôi trả lời mơ hồ, hãy yêu cầu tôi dùng ví dụ thực tế,
-- phân biệt rõ cái gì mới chỉ sourced from docs và cái gì đã verify shape trên host,
-- cuối lab phải kiểm tra lại tôi bằng các tình huống chọn primitive.
+- Không giảng lại toàn bộ level.
+- Nếu cần command/config example, chỉ nêu mức tối thiểu để tôi tự kiểm.
+- Phải nói rõ lớp nào là reliability strategy và lớp nào là integration surface.
+- Nếu một lớp dễ bị nhầm với lớp khác, phải chỉ ra anti-pattern đó.
 
 Deliverables:
-- một cheat sheet ngắn: nhu cầu nào dùng MCP, ACP, API Server, routing, fallback, pool, auxiliary,
-- một bảng scenario-based: tình huống nào cần credential pool / fallback / provider routing / auxiliary model,
-- một note ngắn đánh dấu phần nào mới verified shape trên host và phần nào mới sourced from docs.
+- Một routing/reliability plan ngắn.
+- Một bảng phân biệt 6 lớp: provider routing, fallback, auxiliary, MCP, ACP, API Server.
+- 3 tình huống lỗi mẫu và lớp giải pháp đúng cho mỗi tình huống.
 
 Quality standard:
-- ở mỗi bước phải buộc tôi nói được câu “X không phải Y vì...”,
-- phải tách riêng integration primitives (MCP/ACP/API Server) khỏi reliability layers (pool/fallback/routing/auxiliary),
-- phải nêu rõ provider routing chỉ áp dụng cho OpenRouter,
-- phải nhắc rõ `auxiliary.auto` có thể kéo side tasks bám main model nên ảnh hưởng chi phí.
+- Không được trộn reliability với integration.
+- Phải có ít nhất 1 anti-pattern phổ biến và cách sửa.
+- Plan cuối phải đủ ngắn để dùng lại trong review hoặc design session.
+
+Cuối cùng, trả về:
+1. Routing/reliability plan
+2. Bảng phân biệt 6 lớp
+3. 3 tình huống lỗi mẫu
+4. Boundary nào tôi cần đọc lại ở Level 3
 ```
 
 ## Kết quả mong đợi
 
-Nếu lab đi đúng hướng, bạn phải nhìn được output đủ cụ thể để tự đối chiếu lại bằng phần lý thuyết vừa học.
+Output tốt sẽ có:
+- bảng phân biệt ngắn nhưng sắc,
+- 3 tình huống lỗi giúp thấy rõ khi nào dùng fallback, auxiliary, hay integration surface khác,
+- một plan đủ ngắn để dùng lại khi audit config.
 
-### Success criteria
-
-Bạn coi như hoàn thành lab khi:
-
-- không còn nhầm MCP với API Server,
-- không còn nhầm ACP với “một gateway chat khác”,
-- giải thích được 4 lớp: credential pools / fallback providers / provider routing / auxiliary overrides,
-- hiểu rằng provider routing chỉ áp dụng cho OpenRouter,
-- hiểu rằng `auxiliary.auto` hiện kéo side tasks bám main model nên có ảnh hưởng chi phí.
-
-### Dấu hiệu cần reject hoặc làm lại
-
-- trộn MCP, ACP, API Server, routing, fallback thành một nhóm “integration” chung chung
-- không có bảng tình huống để chọn primitive/layer phù hợp
-- quên nêu boundary OpenRouter-only của provider routing
-- không đánh dấu rõ phần nào đã verify trên host và phần nào chỉ mới sourced from docs
+Dấu hiệu cần làm lại:
+- vẫn lẫn MCP với ACP hoặc API Server,
+- nói về fallback như câu trả lời mặc định cho mọi sự cố,
+- không tách rõ reliability strategy với integration surface,
+- output quá dài nhưng vẫn không rõ anti-pattern.
 
 ## Sau lab, từ nay giao gì cho Jarvis
 
-Từ nay, hãy giao cho Jarvis việc đọc use case rồi đề xuất reliability stack đúng: same-provider rotation, cross-provider fallback, hay auxiliary routing. Sau lab, yêu cầu Jarvis đóng gói một routing-and-reliability brief/template để bạn dùng lại cho các project khác.
+Từ nay, khi bạn review config hoặc thiết kế hệ thống mới, hãy giao cho Jarvis việc tách reliability strategy khỏi integration surface trước.
 
-### Prompt đóng gói để dùng lại
+Prompt ngắn để dùng lại:
 
 ```text
-Jarvis, dựa trên lab tôi vừa hoàn thành, hãy làm 4 việc:
-1. Tóm tắt boundary/mental model cốt lõi tôi vừa học bằng tiếng Việt ngắn gọn.
-2. Rút workflow vừa làm thành một prompt template hoặc checklist tái sử dụng.
-3. Chỉ ra 3 pitfalls dễ lặp lại nhất và cách tự kiểm lại output.
-4. Viết một handoff note ngắn để lần sau tôi hoặc người khác có thể dùng lại mà không phải học lại từ đầu.
+Jarvis, với hệ thống Hermes này, hãy tách giúp tôi:
+- lớp reliability strategy,
+- lớp integration surface,
+- anti-pattern dễ nhầm nhất,
+- và routing plan ngắn nên dùng.
 ```

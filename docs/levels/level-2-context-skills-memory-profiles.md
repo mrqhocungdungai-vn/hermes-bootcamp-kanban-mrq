@@ -52,6 +52,8 @@ Level này bạn cần phân biệt:
 - **AGENTS.md**: contract/project rules
 - **Context references (@-syntax)**: nạp file/folder/diff/URL theo nhu cầu cụ thể
 
+Nếu bạn cần một hình mẫu Jarvis để learner bớt mơ hồ ở giai đoạn đầu, repo này có file tham khảo `docs/templates/jarvis-SOUL.example.md`. Hãy nhớ: đây là **identity sample**, không phải chỗ để nhét project rules.
+
 Hai chi tiết từ docs gốc rất quan trọng nhưng hay bị bỏ sót:
 
 - startup chỉ load **một** project context type theo priority `.hermes.md` → `AGENTS.md` → `CLAUDE.md` → `.cursorrules`, còn `SOUL.md` là identity riêng luôn được load từ `HERMES_HOME`.

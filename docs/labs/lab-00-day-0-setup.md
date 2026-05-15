@@ -80,6 +80,7 @@ hermes profile show jarvis
 - Nếu bootcamp này dùng `jarvis` làm orchestrator trung tâm, thì Day-0 nên kết thúc ở trạng thái: **đã có profile `jarvis` và verify được nó**.
 - Command đúng để tạo nhanh từ profile đang dùng là `hermes profile create jarvis --clone`.
 - Nếu `jarvis` đã tồn tại sẵn, bạn không cần tạo lại; chỉ cần `hermes profile use jarvis` rồi `hermes profile show jarvis`.
+- Nếu bạn chưa biết nên viết `SOUL.md` cho `jarvis` thế nào, hãy tham khảo file mẫu: `docs/templates/jarvis-SOUL.example.md` rồi copy/chỉnh vào `~/.hermes/profiles/jarvis/SOUL.md`.
 
 **Success:** nhìn rõ profile name, path, model, gateway status của `jarvis`, và từ nay khi mở Hermes mặc định bạn đang đứng ở đúng profile học tập. Đây là lớp state của agent, không phải một hội thoại cụ thể.
 

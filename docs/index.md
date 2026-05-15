@@ -30,7 +30,8 @@ Nếu bỏ một nửa, bạn sẽ bị lệch:
 Bắt đầu:
 1. `docs/levels/level-0-khoi-dong-va-mental-model.md`
 2. `docs/labs/lab-00-day-0-setup.md`
-3. `docs/labs/lab-01-first-chat-sessions.md`
+3. nếu cần mẫu persona cho profile `jarvis`, xem `docs/templates/jarvis-SOUL.example.md`
+4. `docs/labs/lab-01-first-chat-sessions.md`
 
 ### 2. Tôi đã cài Hermes, nhưng mental model còn mơ hồ
 Bắt đầu:

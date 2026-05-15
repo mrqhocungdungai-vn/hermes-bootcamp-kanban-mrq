@@ -48,6 +48,7 @@ Course phải giúp learner đi từ mental model nền tảng tới năng lực
 - Đã viết lại toàn bộ skeleton + level docs + labs + source map
 - Đã cập nhật handoff files (`README.md`, `AGENTS.md`, `BOOTCAMP-STATUS.md`)
 - Đã bổ sung mô tả `About` rõ hơn ở entrypoints để learner thấy ngay repo này là curriculum repo Hermes-first, không phải app repo
+- Đã bổ sung file mẫu `docs/templates/jarvis-SOUL.example.md` để learner có một Jarvis persona tham khảo khi tạo profile `jarvis`
 
 ### Current milestone
 - Authored through: **Level 5 + 8 labs + source map**
@@ -93,6 +94,7 @@ Course phải giúp learner đi từ mental model nền tảng tới năng lực
 - `docs/labs/lab-04-kanban-pm-coder-reviewer.md`
 - `docs/labs/lab-05-builder-capstone.md`
 - `docs/templates/capstone-brief-template.md`
+- `docs/templates/jarvis-SOUL.example.md`
 - `docs/reference/hermes-docs-source-map.md`
 
 ## 6. Verified operational facts

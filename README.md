@@ -173,6 +173,7 @@ Lưu ý quan trọng:
 
 ### Reference
 - `docs/reference/hermes-docs-source-map.md`
+- `docs/templates/jarvis-SOUL.example.md` — mẫu `SOUL.md` cho profile `jarvis`
 
 ## Lưu ý về command trong repo
 

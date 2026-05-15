@@ -43,6 +43,7 @@ Sau đó tự trả lời:
 - project context priority: `.hermes.md` → `AGENTS.md` → `CLAUDE.md` → `.cursorrules`
 - `SOUL.md` là identity riêng, load từ `HERMES_HOME`, không phải từ repo cwd
 - subdirectory `AGENTS.md` được discover dần trong lúc agent chạm vào path liên quan
+- nếu bạn muốn một mẫu Jarvis cụ thể để tham khảo, dùng `docs/templates/jarvis-SOUL.example.md` rồi chỉnh thành `SOUL.md` của profile `jarvis`
 
 ### Phần B — Context references: mạnh, nhưng chủ yếu là CLI feature
 

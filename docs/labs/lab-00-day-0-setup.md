@@ -59,13 +59,29 @@ hermes model
 
 > Ghi chú: `hermes auth list` vẫn hữu ích để inspect pooled credentials, nhưng **không phải** lúc nào cũng là bằng chứng duy nhất rằng provider đã usable. Quickstart của Hermes đặt `hermes model` / `hermes setup` làm đường chính để xác nhận provider.
 
-### Bước 3 — xác nhận profile hiện tại để tránh lẫn với session
+### Bước 3 — xác nhận hoặc tạo profile `jarvis` ngay từ Day-0
+
+Vì đây là lab thực hành, mục tiêu không chỉ là “biết profile là gì” mà là **có sẵn profile Jarvis để dùng cho các lab tiếp theo**.
 
 ```bash
+hermes profile list
 hermes profile show default
+
+# nếu chưa có jarvis thì tạo từ profile đang active/default
+hermes profile create jarvis --clone
+
+# chuyển sticky default sang jarvis để từ nay mở Hermes vào đúng profile học tập
+hermes profile use jarvis
+hermes profile show jarvis
 ```
 
-**Success:** nhìn rõ profile name, path, model, gateway status. Đây là lớp state của agent, không phải một hội thoại cụ thể.
+**Cách hiểu đúng:**
+- `hermes profile show default` chỉ giúp bạn nhìn trạng thái mặc định hiện tại trước khi tách profile học tập.
+- Nếu bootcamp này dùng `jarvis` làm orchestrator trung tâm, thì Day-0 nên kết thúc ở trạng thái: **đã có profile `jarvis` và verify được nó**.
+- Command đúng để tạo nhanh từ profile đang dùng là `hermes profile create jarvis --clone`.
+- Nếu `jarvis` đã tồn tại sẵn, bạn không cần tạo lại; chỉ cần `hermes profile use jarvis` rồi `hermes profile show jarvis`.
+
+**Success:** nhìn rõ profile name, path, model, gateway status của `jarvis`, và từ nay khi mở Hermes mặc định bạn đang đứng ở đúng profile học tập. Đây là lớp state của agent, không phải một hội thoại cụ thể.
 
 ### Bước 4 — nếu định học backend isolation / Docker backend
 

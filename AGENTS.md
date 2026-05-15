@@ -20,8 +20,11 @@ Handoff file cho mọi agent/phiên làm việc tiếp theo trong repo `/home/mr
 4. **Artifact bền vững**: mọi flow review nên khuyến khích lưu file review trong repo, không chỉ chat prose.
 5. **Giữ router sống**: nếu thêm/chuyển file, cập nhật đồng thời `README.md`, `docs/index.md`, `BOOTCAMP-STATUS.md`.
 6. **Một concept mỗi lesson**: tránh lesson quá rộng khiến learner lẫn giữa các layer.
-7. **Ghi nguồn rõ**: lesson/level nên dẫn lại page docs liên quan.
-8. **Không tự tiện đổi framing**: repo này phục vụ lộ trình từ cơ bản đến nâng cao cho learner Việt Nam muốn xây **Jarvis-as-orchestrator + multi-project Kanban model**.
+7. **Mỗi chặng luôn có 2 phần**: level docs lo lý thuyết sâu theo docs Hermes; lab docs lo prompt/workflow để learner chỉ đạo Jarvis thực hành đúng lý thuyết đó.
+8. **Giữ fixed format cho learner-facing docs**: level/lab docs nên có đủ các mục `Lý thuyết cần nắm`, `Hiểu sai thường gặp`, `Prompt lab cho Jarvis`, `Kết quả mong đợi`, `Sau lab, từ nay giao gì cho Jarvis`.
+9. **Ghi nguồn rõ**: lesson/level nên dẫn lại page docs liên quan.
+10. **Không tự tiện đổi framing**: repo này phục vụ lộ trình từ cơ bản đến nâng cao cho learner Việt Nam muốn xây **Jarvis-as-orchestrator + multi-project Kanban model**.
+11. **Đóng gói để tái sử dụng và chia sẻ**: sau mỗi lab/pass phù hợp, nên đẩy learner tới prompt template, checklist, handoff note, hoặc skill draft để dùng lại lâu dài và có thể chia sẻ cho người khác.
 
 ## Framing sư phạm đã khóa
 

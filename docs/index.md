@@ -2,6 +2,28 @@
 
 File này không phải file dump. Nó là **router** để bạn tìm đúng điểm bắt đầu trong dưới 30 giây.
 
+## About curriculum này
+
+Trước khi chọn path, hãy khóa 3 ý:
+
+1. Đây là **curriculum repo về Hermes Agent**, không phải app repo.
+2. Repo này dạy bạn **hiểu boundary + mental model**, rồi mới chuyển sang **chỉ đạo Jarvis thực hành**.
+3. Benchmark Todo App chỉ là **scenario minh họa xuyên suốt** để học workflow Jarvis/Kanban, không phải mục tiêu sản phẩm cuối cùng của repo.
+
+## Rule nền của curriculum này
+
+Mỗi chặng học luôn có **2 nửa phải đi cùng nhau**:
+
+1. **Level docs = phần lý thuyết cốt lõi** để bạn hiểu sâu docs Hermes, boundary, mental model.
+2. **Lab docs = phần thực hành prompt-first với Jarvis** để bạn biến lý thuyết thành orchestration thật dưới sự chỉ đạo của mình.
+3. Sau khi lab chạy xong, bạn phải **quay lại đánh giá output bằng lý thuyết vừa đọc**, rồi yêu cầu Jarvis đóng gói lại thành asset tái sử dụng khi phù hợp.
+
+Nếu bỏ một nửa, bạn sẽ bị lệch:
+- chỉ đọc level -> hiểu nhưng khó giao việc bền vững cho Jarvis,
+- chỉ làm lab -> chạy được prompt nhưng không thật sự hiểu để tái dùng lâu dài.
+
+Đích cuối của curriculum này không phải chỉ là “làm được một lần”, mà là **học đúng một lần rồi đóng gói thành workflow/skill/checklist để dùng lại và chia sẻ**.
+
 ## Nếu bạn là ai, hãy bắt đầu ở đâu?
 
 ### 1. Tôi mới với Hermes
@@ -44,6 +66,9 @@ Bắt đầu:
 **Canonical path cho đa số learner:**  
 `README.md` -> `docs/index.md` -> `level-0` -> `lab-00` -> `level-1` -> `lab-01` -> `level-2` -> `lab-02` -> `lab-02b` -> `level-3` -> `lab-03` -> `lab-03b` -> `level-4` -> `lab-04` -> `level-5` -> `lab-05`
 
+Hãy đọc canonical path này theo cặp **lý thuyết -> lab**.  
+Nghĩa là: hiểu xong level thì phải chuyển ngay sang lab để huấn luyện Jarvis làm đúng boundary đó dưới sự chỉ đạo của bạn.
+
 Quick path chỉ là **đường tắt có điều kiện**. Nếu bạn thấy mơ hồ ở bất kỳ boundary nào, quay về canonical path.
 
 ## Level map
@@ -54,7 +79,7 @@ Quick path chỉ là **đường tắt có điều kiện**. Nếu bạn thấy 
 | 1 | `docs/levels/level-1-core-operator.md` | Làm sao dùng Hermes như operator an toàn và có kiểm soát? |
 | 2 | `docs/levels/level-2-context-skills-memory-profiles.md` | Làm sao dạy Hermes, nhớ đúng, nạp context đúng, tách profile đúng? |
 | 3 | `docs/levels/level-3-automation-integrations.md` | Làm sao mở rộng Hermes sang trigger/service/integration/reliability layers mà không trộn lẫn chúng? |
-| 4 | `docs/levels/level-4-agent-teams-kanban.md` | Làm sao để Jarvis làm orchestrator và điều phối agent team bền vững bằng Kanban? |
+| 4 | `docs/levels/level-4-agent-teams-kanban.md` | Làm sao hiểu Kanban đủ sâu để lãnh đạo ở tầng chiến lược, còn Jarvis làm orchestrator điều phối agent team bền vững? |
 | 5 | `docs/levels/level-5-advanced-builder-capstone.md` | Làm sao thành builder/operator nâng cao và tự thiết kế capstone? |
 
 ## Quick paths theo mục tiêu

@@ -351,3 +351,144 @@ hermes profile --help
 **Verification:**
 - Đã re-check markdown links nội bộ: không có broken relative links.
 - Đã sync các file router/handoff chính: `README.md`, `docs/index.md`, `BOOTCAMP-STATUS.md`, `AGENTS.md`.
+
+### Editorial pass 03 — Lab 04 chuyển sang prompt-first Jarvis orchestration
+**Mục tiêu pass này:**
+- sửa `docs/labs/lab-04-kanban-pm-coder-reviewer.md` để không dạy learner tự tay đóng vai task-graph builder,
+- chuyển lab sang hướng dùng prompt để Jarvis tự tạo graph và tự siết handoff,
+- giữ CLI ở vai trò bootstrap / quan sát / recovery thay vì manual orchestration.
+
+**Repo improvements đã áp dụng:**
+- Viết lại `docs/labs/lab-04-kanban-pm-coder-reviewer.md` theo framing mới:
+  - nhấn mạnh `prompt-first` là mục tiêu chính của lab,
+  - giữ `hermes kanban ...` cho preflight, board bootstrap, quan sát, recovery,
+  - bỏ mental model cũ kiểu learner tự copy-paste 4 block `kanban create` để thay Jarvis.
+- Thêm 2 prompt mẫu:
+  - prompt seed để Jarvis tự tạo graph Jarvis -> PM -> Coder -> Reviewer,
+  - prompt self-review để Jarvis tự siết artifact path, task body, và dependency contract trước dispatch.
+- Thêm anti-pattern section để chặn cách học sai: operator giành hết phần orchestration của Jarvis.
+
+**Editorial findings chính:**
+1. Lab Level 4 này nên dạy cách **huấn luyện Jarvis thành orchestrator**, không chỉ dạy syntax CLI.
+2. CLI vẫn là control plane quan trọng, nhưng không nên trở thành default cho việc hand-author toàn bộ task graph khi mục tiêu là agent-team maturity.
+3. Prompt quality + handoff quality là phần cần luyện, không chỉ command fluency.
+
+**Verification:**
+- Đã đọc lại toàn bộ `docs/labs/lab-04-kanban-pm-coder-reviewer.md` sau rewrite.
+- Giữ nguyên các surface CLI cần thiết cho bootstrap/gateway/recovery.
+- Không đổi benchmark framing: Todo App vẫn là scenario minh họa trừ khi learner tự chuẩn bị practice repo.
+
+### Editorial pass 04 — Level 4 chuyển rõ sang strategic leadership over Jarvis
+**Mục tiêu pass này:**
+- làm phần lý thuyết nói rõ learner phải hiểu Kanban để lãnh đạo ở tầng chiến lược,
+- giải thích prompt trong Lab 04 thực sự buộc Jarvis làm gì,
+- nhấn mạnh board là runtime coordination system chứ không phải chỗ để người ngồi gõ lệnh hộ Jarvis.
+
+**Repo improvements đã áp dụng:**
+- Viết lại `docs/levels/level-4-agent-teams-kanban.md` để thêm rõ:
+  - mục tiêu level: con người giữ tầng chiến lược, Jarvis giữ tầng orchestration/runtime,
+  - định nghĩa Kanban board theo runtime model,
+  - capability map của board: task/dependency/status/runs/recovery/dispatch,
+  - lesson riêng về vai trò con người đứng trên Jarvis,
+  - lesson riêng giải thích prompt trong Lab 04 làm 6 việc gì cho orchestration.
+- Cập nhật `docs/index.md` để Level 4 route nói rõ mục tiêu là **hiểu Kanban đủ sâu để lãnh đạo**, không chỉ để Jarvis chạy thay.
+
+**Editorial findings chính:**
+1. Nếu lý thuyết không chỉ ra tầng chiến lược của con người, learner rất dễ rơi vào mode "AI assistant cao cấp + tôi làm thư ký gõ command".
+2. Lab prompt chỉ có giá trị khi learner hiểu nó là một orchestration brief: objective, graph shape, assignee/workspace, handoff, ambiguity tightening, blocker reporting.
+3. Dạy Kanban tốt phải làm learner hiểu board như một hệ runtime có quan sát và recovery, không chỉ là bảng giao việc.
+
+**Verification:**
+- Đã đọc lại `docs/levels/level-4-agent-teams-kanban.md` sau rewrite.
+- Nội dung Level 4 hiện khớp với framing prompt-first của `docs/labs/lab-04-kanban-pm-coder-reviewer.md`.
+- `docs/index.md` đã sync câu mô tả Level 4 với framing mới.
+
+### Editorial pass 05 — khóa lại contract 2 phần: theory sâu + lab prompt-first với Jarvis
+**Mục tiêu pass này:**
+- chốt rõ ở mức repo framing rằng curriculum luôn có 2 phần song hành,
+- làm cho learner thấy ngay từ entrypoint rằng level docs là để hiểu sâu, còn lab docs là để chỉ đạo Jarvis thực hành,
+- nhấn mạnh mục tiêu cuối là học một lần để chuyển sang mode cộng tác lâu dài với Jarvis.
+
+**Repo improvements đã áp dụng:**
+- Cập nhật `README.md` để thêm:
+  - mục **Contract học tập của repo này: luôn có 2 phần**,
+  - triết lý `2 lớp học đi cùng nhau`,
+  - hướng dẫn cách đọc mỗi cặp level/lab đúng vai trò.
+- Cập nhật `docs/index.md` để:
+  - thêm rule nền `level docs = lý thuyết`, `lab docs = prompt-first thực hành với Jarvis`,
+  - nhắc canonical path phải đi theo nhịp **lý thuyết -> lab**.
+- Cập nhật `BOOTCAMP-STATUS.md` để:
+  - thêm fixed learning contract vào spec,
+  - sync current milestone theo framing mới theory + lab.
+- Cập nhật `AGENTS.md` để khóa non-negotiable mới: mỗi chặng luôn phải có đủ 2 phần.
+
+**Editorial findings chính:**
+1. Nếu không khóa contract 2 phần ở mức repo router, learner rất dễ coi lab như phụ lục thay vì nửa còn lại của việc học.
+2. Giá trị dài hạn của repo này là giúp learner chuyển từ mode “học lại” sang mode “điều phối Jarvis” trên dự án thật.
+3. Lab prompt chỉ phát huy tác dụng lâu dài khi learner hiểu rõ level doc đang dạy boundary nào.
+
+**Verification:**
+- Đã sync 4 file framing/handoff chính: `README.md`, `docs/index.md`, `BOOTCAMP-STATUS.md`, `AGENTS.md`.
+- Không đổi canonical route tổng thể của repo; chỉ làm rõ contract học tập của route đó.
+
+### Editorial pass 06 — chuẩn hóa fixed format cho toàn bộ Level 0-5
+**Mục tiêu pass này:**
+- chuẩn hóa toàn bộ level docs theo cùng một khung đọc nhanh ở cuối level,
+- giúp learner luôn thấy rõ phần nào là lý thuyết, phần nào là hiểu sai, prompt lab, kết quả mong đợi, và phần việc có thể giao lại cho Jarvis,
+- làm cho mỗi level trở thành một handoff contract rõ ràng giữa người học và Jarvis.
+
+**Repo improvements đã áp dụng:**
+- Cập nhật cả 6 file level:
+  - `docs/levels/level-0-khoi-dong-va-mental-model.md`
+  - `docs/levels/level-1-core-operator.md`
+  - `docs/levels/level-2-context-skills-memory-profiles.md`
+  - `docs/levels/level-3-automation-integrations.md`
+  - `docs/levels/level-4-agent-teams-kanban.md`
+  - `docs/levels/level-5-advanced-builder-capstone.md`
+- Mỗi level hiện đều có đủ 5 mục cố định:
+  - `Lý thuyết cần nắm`
+  - `Hiểu sai thường gặp`
+  - `Prompt lab cho Jarvis`
+  - `Kết quả mong đợi`
+  - `Sau lab thì từ nay giao gì cho Jarvis`
+- Cập nhật `AGENTS.md` để khóa non-negotiable mới cho future editors: level docs phải giữ fixed format này.
+- Cập nhật `BOOTCAMP-STATUS.md` để ghi nhận Level 0-5 đã được chuẩn hóa format.
+
+**Editorial findings chính:**
+1. Người học học nhanh hơn khi cuối mỗi level có một “contract tóm tắt” nhất quán thay vì phải tự suy ra từ lesson prose dài.
+2. Mục `Sau lab thì từ nay giao gì cho Jarvis` giúp khóa chuyển đổi từ mode học sang mode cộng tác dài hạn.
+3. Prompt lab chỉ mạnh khi level doc nói rõ learner đang luyện boundary nào và sau đó chuyển quyền phần nào cho Jarvis.
+
+**Verification:**
+- Đã kiểm tra cả 6 level đều có đủ 5 heading chuẩn hóa.
+- Đã đọc lại các đoạn tail mới của Level 0-5 để xác nhận format nhất quán và không gãy router `Next`.
+
+### Editorial pass 07 — mọi lab đều phải có prompt test copy vào Jarvis
+**Mục tiêu pass này:**
+- sửa learner-facing contract của lab docs để learner thực hành bằng Hermes Agent thật,
+- chặn việc lab bị hiểu thành prose/reference hoặc checklist shell command thuần túy,
+- chuẩn hóa đầu mỗi lab bằng một prompt test có thể copy ngay vào Jarvis.
+
+**Repo improvements đã áp dụng:**
+- Thêm mục `Prompt test để copy vào Jarvis` vào đầu cả 8 lab:
+  - `docs/labs/lab-00-day-0-setup.md`
+  - `docs/labs/lab-01-first-chat-sessions.md`
+  - `docs/labs/lab-02-models-tools-skills-memory.md`
+  - `docs/labs/lab-02b-context-files-profiles.md`
+  - `docs/labs/lab-03-automation-gateway.md`
+  - `docs/labs/lab-03b-routing-reliability.md`
+  - `docs/labs/lab-04-kanban-pm-coder-reviewer.md`
+  - `docs/labs/lab-05-builder-capstone.md`
+- Chuẩn hóa prompt section theo khung gần nhất quán: `Objective`, `Context`, `Guardrails`, `Output standard`.
+- Điều chỉnh riêng `lab-04` để phần đầu file cũng có prompt ngắn copy-paste được, ngoài prompt orchestration đầy đủ ở Bước 4 và prompt self-review ở Bước 5.
+- Giữ vai trò của CLI trong labs ở mức bootstrap / quan sát / recovery thay vì để learner vô thức thay Jarvis làm phần orchestration.
+
+**Editorial findings chính:**
+1. Với triết lý của repo này, learner phải mở Hermes Agent thật khi làm lab; nếu không có prompt test ở đầu file, learner rất dễ trượt về mode self-study prose.
+2. Prompt-first không có nghĩa là prompt mơ hồ; learner vẫn phải được buộc nêu objective, context, guardrails, và standard.
+3. Lab 04 là chỗ dễ lệch nhất: nếu phần mở đầu không có prompt rõ, learner dễ quay lại hand-author workflow bằng CLI thay vì huấn luyện Jarvis orchestrate.
+
+**Verification:**
+- Đã kiểm tra bằng script toàn bộ `docs/labs/lab-*.md`: cả 8 file đều có heading `Prompt test để copy vào Jarvis`.
+- Đã xác nhận cả 8 prompt section đều có đủ 4 trường: `Objective`, `Context`, `Guardrails`, `Output standard`.
+- Đã đọc lại representative snippets của Lab 00, Lab 03, Lab 04, và Lab 05 để xác nhận wording prompt-first xuất hiện ngay đầu file.

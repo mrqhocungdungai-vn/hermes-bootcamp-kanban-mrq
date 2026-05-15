@@ -130,14 +130,80 @@ Handoff tốt phải có:
 
 Đây chính là chiếc cầu nối giữa Level 2 và Kanban Level 4.
 
-## Exit criteria
+## Lý thuyết cần nắm
 
-- Phân biệt đúng skill vs memory vs session recall
-- Biết vai trò của AGENTS.md / SOUL.md / context references
-- Giải thích profile vs worktree đúng bằng ví dụ cụ thể
-- Nói đúng rằng profile không phải sandbox và `terminal.cwd` mới là workspace start point
-- Biết `@...` context references chủ yếu là CLI feature, không phải gateway magic
-- Chấp nhận “artifact in repo” là chuẩn vận hành, không phải optional nicety
+- `skill`, `memory`, `session_search/history` là 3 loại trí nhớ khác nhau; trộn chúng sẽ làm Hermes bẩn dần.
+- `AGENTS.md`, `SOUL.md`, context references, và project-context priority là cách dạy Hermes theo file chứ không theo prompt may rủi.
+- `@...` context references chủ yếu là **CLI-first**, không phải gateway magic.
+- `profile` là identity/state boundary; `worktree` là filesystem boundary; `profile != workspace != sandbox`.
+- Curator và external memory chỉ nên mở rộng sau khi hygiene nội bộ đã chắc.
+- Durable handoff artifact là điều kiện để multi-agent teamwork có thể sống lâu.
+
+
+### Sơ đồ mental model
+
+```text
+Muốn Hermes nhớ/biết gì?
+        |
+        +--> Reusable procedure? --------> [Skill]
+        |
+        +--> Durable fact về user/env? --> [Memory]
+        |
+        +--> Chỉ cần recall transcript cũ? -> [Session search]
+        |
+        +--> Rule của project/repo? -----> [Context file]
+        |
+        +--> Cần identity/state riêng? --> [Profile]
+        |
+        +--> Cần filesystem isolation? -> [Worktree]
+
+Rule gốc:
+- skill = cách làm
+- memory = fact bền
+- profile = state boundary
+- worktree = filesystem boundary
+```
+
+## Hiểu sai thường gặp
+
+1. “Cái gì muốn nhớ cũng nhét vào memory.” -> Sai, workflow/procedure thường nên thành skill.
+2. “AGENTS.md và SOUL.md là một.” -> Sai, project contract khác global identity.
+3. “`@file` ở đâu cũng tự expand.” -> Sai, đó chủ yếu là CLI feature.
+4. “Tách profile là đủ an toàn.” -> Sai, profile không phải sandbox và không thay worktree.
+5. “Review/handoff nói trong chat là đủ.” -> Sai, Level 4 sẽ sụp nếu không có artifact bền vững.
+
+## Prompt lab cho Jarvis
+
+```text
+Jarvis, hãy đóng vai context architect cho Level 2.
+
+Mục tiêu:
+- giúp tôi phân loại đúng cái gì nên thành skill, memory, session recall, hay context file,
+- giúp tôi thiết kế context/handoff architecture bền vững cho project,
+- chuẩn bị nền cho agent team sau này.
+
+Cách làm:
+1. Đưa cho tôi 5 ví dụ thông tin và bắt tôi tự phân loại.
+2. Dẫn tôi qua `lab-02-models-tools-skills-memory.md` và `lab-02b-context-files-profiles.md`.
+3. Nếu tôi thiết kế context sai, hãy sửa bằng cách chỉ ra boundary nào đang bị lẫn.
+4. Kết thúc bằng đề xuất: AGENTS.md nên chứa gì, SOUL.md nên chứa gì, và handoff artifact nên sống ở đâu.
+```
+
+## Kết quả mong đợi
+
+- Phân biệt đúng skill vs memory vs session recall.
+- Biết vai trò của AGENTS.md / SOUL.md / context references.
+- Giải thích profile vs worktree đúng bằng ví dụ cụ thể.
+- Nói đúng rằng profile không phải sandbox và `terminal.cwd` mới là workspace start point.
+- Biết `@...` context references chủ yếu là CLI feature, không phải gateway magic.
+- Chấp nhận “artifact in repo” là chuẩn vận hành, không phải optional nicety.
+
+## Sau lab, từ nay giao gì cho Jarvis
+
+- phân loại thông tin mới thành skill, memory, session recall, hay context file,
+- đề xuất/update AGENTS.md hoặc handoff templates cho project,
+- nhắc bạn khi workflow đang lệ thuộc quá nhiều vào chat transcript,
+- chuẩn bị profile/worktree/context architecture trước khi bước vào Level 4.
 
 ## Next
 

@@ -2,6 +2,26 @@
 
 Khóa học Hermes-first, repo-backed, viết lại từ đầu để bám **tài liệu gốc Hermes Agent** và ưu tiên đúng trục học: **Kanban + agent team + automation**, không trôi sang kiểu học app-first.
 
+## About khóa học này
+
+Đây là một **curriculum repo bằng tiếng Việt** để học Hermes Agent theo kiểu **repo-backed, theory-first, và Jarvis-directed**.
+
+Repo này tồn tại để giúp bạn chuyển từ mode:
+- "chat với AI cho từng việc lẻ",
+
+sang mode:
+- "điều phối một hệ thống agent có session, profile, skills, memory, automation, Kanban, review loop, và durable handoff".
+
+Điểm quan trọng của phần about này là:
+- đây là **repo học tập**, không phải product app repo,
+- đây là **repo để hiểu Hermes đúng mental model**, không phải prompt cheat sheet ngắn hạn,
+- đây là **repo để học cộng tác lâu dài với Jarvis như orchestrator**, không phải nơi learner tự làm thay toàn bộ orchestration,
+- đây là **repo-backed workflow**, nên tri thức quan trọng phải sống trong file và artifact, không chỉ trong chat.
+- đây là repo để **học một lần -> hiểu sâu -> đóng gói -> tái sử dụng -> chia sẻ**, chứ không học để giữ riêng cho một người.
+
+Nếu bạn chỉ muốn một Todo App hoàn chỉnh để chạy production, repo này không phải đích cuối.  
+Nếu bạn muốn học cách dùng Hermes để thiết kế và điều phối workflow kiểu Jarvis -> PM -> Coder -> Reviewer một cách bền vững, đây là đúng repo.
+
 ## Mục tiêu repo
 
 Repo này dùng để học Hermes theo thứ tự từ **cơ bản -> vận hành -> automation -> agent teams -> builder level**.  
@@ -11,6 +31,24 @@ Benchmark xuyên suốt là **Todo App scenario** để có ngữ cảnh thực 
 2. hiểu khi nào dùng session / profile / skill / memory / cron / delegation / kanban,
 3. dựng được workflow **Jarvis (orchestrator) -> PM -> Coder -> Reviewer** với handoff artifact bền vững trong repo,
 4. tiến tới một **Jarvis orchestrator** có thể điều phối nhiều project bằng Kanban thay vì “mỗi việc một bot riêng”.
+
+## Contract học tập của repo này: luôn có 2 phần
+
+Mỗi chặng học trong repo này phải có đủ **2 phần bổ sung cho nhau**:
+
+1. **Phần lý thuyết cốt lõi**  
+   - bám docs gốc Hermes để learner hiểu sâu boundary và mental model,
+   - trả lời câu hỏi **vì sao** phải làm như vậy,
+   - giúp learner không bị lệ thuộc vào mẹo prompt ngắn hạn.
+
+2. **Phần lab thực hành dạng prompt cho Jarvis**  
+   - biến lý thuyết thành bài tập điều phối thật,
+   - learner ra objective + guardrails + tiêu chuẩn đầu ra,
+   - Jarvis học cách cùng người học làm việc, cùng học, cùng phát triển trên dự án thật.
+
+Mục tiêu cuối cùng **không** phải để người học cứ lặp lại việc “học lại Hermes từ đầu” mỗi lần mở project mới.  
+Mục tiêu là: **học một lần cho ra mental model đúng, rồi chuyển sang mode giao việc/đồng hành với Jarvis như một orchestrator lâu dài**.
+Sau mỗi chặng, learner nên ép Jarvis giúp mình **đóng gói điều vừa học thành prompt template, checklist, handoff note, hoặc skill draft** để dùng lại lâu dài và có thể chia sẻ cho người đến sau.
 
 ## Nguồn gốc khóa học
 
@@ -66,12 +104,26 @@ Xem bản đồ nguồn đầy đủ ở: `docs/reference/hermes-docs-source-map
 ## Triết lý dạy học của repo này
 
 - **Hermes-first**: học cơ chế Hermes trước, không nhảy ngay vào code app.
+- **2 lớp học đi cùng nhau**: level docs lo phần hiểu sâu; lab docs lo phần biến hiểu biết đó thành prompt/workflow điều phối với Jarvis.
+- **Đóng gói để dùng lại**: qua lab rồi thì không dừng ở “đã làm xong”, mà phải rút ra asset tái sử dụng và nếu phù hợp thì chia sẻ cho team/cộng đồng.
 - **Repo-backed**: tri thức nằm trong file, không nằm trong chat transient.
 - **Một concept mỗi lesson**: tránh nhồi nhiều khái niệm gần nhau như model/provider/toolset trong một lúc.
 - **Probe -> Reveal -> Lab -> Feynman check**: luôn có nhịp phát hiện hiểu nhầm rồi mới thực hành.
 - **Artifact-driven teamwork**: reviewer phải để lại artifact bền vững, coder đọc artifact đó để sửa.
 - **Kanban khi cần durability, audit trail, review loop, hoặc multi-profile**; không lạm dụng cho tác vụ nhỏ.
 - **Jarvis làm orchestrator**: course dùng một orchestrator trung tâm để learner dễ hiểu cơ chế route/decompose/dispatch trước khi nhân rộng thành team phức tạp hơn.
+
+## Cách đọc đúng mỗi level/lab pair
+
+Với mỗi level, hãy đi theo nhịp này:
+
+1. đọc **level doc** để nắm lý thuyết, boundary, và mental model,
+2. làm **lab tương ứng** để buộc Jarvis thực thi đúng mental model đó,
+3. sau lab, tự trả lời lại bằng lời của mình: từ nay phần nào bạn làm ở tầng chiến lược, phần nào giao lại cho Jarvis.
+4. nếu đã đánh giá được output, yêu cầu Jarvis đóng gói lại thành skill draft, prompt template, checklist, hoặc handoff note để lần sau không phải học lại từ đầu.
+
+Nếu bạn chỉ đọc lý thuyết mà không làm lab, bạn sẽ hiểu nhưng chưa vận hành được.  
+Nếu bạn chỉ copy prompt trong lab mà không hiểu level, bạn sẽ chạy được một lần nhưng không trưởng thành thành người lãnh đạo Jarvis.
 
 ## Prerequisites tối thiểu
 

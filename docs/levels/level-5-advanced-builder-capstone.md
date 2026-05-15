@@ -393,29 +393,79 @@ Nên chọn theo **primitive trung tâm**.
 
 ---
 
-## Anti-patterns của Level 5
+## Lý thuyết cần nắm
 
-- Thấy thứ gì mới cũng muốn biến thành plugin
-- Chưa rõ boundary đã lao vào external memory/local LLM
-- Dùng Python library khi thật ra cần gateway service
-- Dùng gateway khi thật ra chỉ cần một script/library call
-- Cài plugin xong quên enable
-- Thấy plugin trong list rồi tưởng plugin đã active
-- Không hiểu cached prompt vs ephemeral layers nhưng lại cố debug bằng cảm giác
-- Không biết session bị compress ở gateway hay agent loop mà đã kết luận sai
+- Builder phải chọn đúng **bề mặt mở rộng**: skill vs plugin vs built-in tool vs external system.
+- Plugin discovery, enablement, và runtime activation là 3 chuyện khác nhau.
+- External memory là additive layer, không thay built-in memory, và chỉ một external provider active cùng lúc.
+- Python library và gateway là hai boundary kiến trúc khác nhau.
+- Local LLM trên Mac là trade-off về privacy/cost/reliability, không phải nâng cấp miễn phí.
+- Debug builder phải đi theo subsystem: architecture, agent loop, prompt assembly, compression/caching, plugin lifecycle.
+- Capstone nên chọn theo **primitive trung tâm**, không chọn theo feature nghe vui tai.
 
----
 
-## Exit criteria
+### Sơ đồ mental model
 
-Bạn qua Level 5 khi bạn có thể tự trả lời rõ ràng:
-- Khi nào dùng **skill**, khi nào dùng **plugin**, khi nào phải sửa **core tool**
-- Plugin discovery, enablement, và runtime activation khác nhau thế nào
-- External memory khác built-in memory ở đâu, và vì sao chỉ một provider active
-- Python library vs gateway khác nhau ở lớp kiến trúc nào
-- Local LLM trên Mac cần những verify nào trước khi dùng thật
-- Nếu Hermes “kỳ”, bạn phải đọc page internals nào trước
-- Bạn chọn được **một capstone** với primitive trung tâm rõ ràng
+```text
+Muốn mở rộng Hermes ở lớp nào?
+        |
+        +--> Chỉ cần quy trình tái sử dụng? ---> [Skill]
+        |
+        +--> Cần capability có sẵn? ---------> [Built-in tool / toolset]
+        |
+        +--> Cần tích hợp hệ ngoài? ---------> [MCP / API / Gateway]
+        |
+        +--> Cần extension hệ thống? -------> [Plugin / provider / memory provider]
+        |
+        +--> Cần embed vào app khác? -------> [Python library]
+
+Builder giỏi = chọn đúng surface trước khi code
+```
+
+## Hiểu sai thường gặp
+
+- Thấy thứ gì mới cũng muốn biến thành plugin.
+- Chưa rõ boundary đã lao vào external memory/local LLM.
+- Dùng Python library khi thật ra cần gateway service.
+- Dùng gateway khi thật ra chỉ cần một script/library call.
+- Cài plugin xong quên enable.
+- Thấy plugin trong list rồi tưởng plugin đã active.
+- Không hiểu cached prompt vs ephemeral layers nhưng lại cố debug bằng cảm giác.
+- Không biết session bị compress ở gateway hay agent loop mà đã kết luận sai.
+
+## Prompt lab cho Jarvis
+
+```text
+Jarvis, hãy đóng vai builder advisor cho Level 5.
+
+Mục tiêu:
+- giúp tôi chọn đúng lớp mở rộng của Hermes,
+- tránh over-engineering,
+- và chốt một capstone có primitive trung tâm rõ ràng.
+
+Cách làm:
+1. Dùng `lab-05-builder-capstone.md` làm khung thực hành.
+2. Bắt tôi giải thích vì sao một ý tưởng nên là skill, plugin, core tool, hay hệ thống ngoài.
+3. Nếu tôi chọn sai boundary, hãy sửa bằng ngôn ngữ kiến trúc ngắn gọn.
+4. Kết thúc bằng builder brief: capstone tôi nên làm, subsystem nào phải hiểu sâu hơn, và checklist verify trước khi build thật.
+```
+
+## Kết quả mong đợi
+
+- Trả lời rõ khi nào dùng **skill**, khi nào dùng **plugin**, khi nào phải sửa **core tool**.
+- Phân biệt plugin discovery, enablement, và runtime activation.
+- Giải thích external memory khác built-in memory ở đâu, và vì sao chỉ một provider active.
+- Phân biệt Python library vs gateway ở lớp kiến trúc.
+- Biết local LLM trên Mac cần những verify nào trước khi dùng thật.
+- Biết nếu Hermes “kỳ” thì phải đọc subsystem internals nào trước.
+- Chọn được **một capstone** với primitive trung tâm rõ ràng.
+
+## Sau lab, từ nay giao gì cho Jarvis
+
+- đánh giá một ý tưởng mới nên dừng ở skill, lên plugin, hay ra hệ thống ngoài,
+- audit plugin/memory/integration architecture trước khi bạn build sâu,
+- đề xuất plan debug theo subsystem thay vì đoán mò,
+- giúp bạn chốt capstone brief và verification checklist trước khi đầu tư công sức lớn.
 
 ## Next
 

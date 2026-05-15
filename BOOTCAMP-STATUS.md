@@ -25,6 +25,12 @@ Course phải giúp learner đi từ mental model nền tảng tới năng lực
 ## 3. Fixed spec / non-negotiables
 - Stack / constraints: curriculum markdown repo, tiếng Việt, Hermes-first
 - Fixed scope: học Hermes + Kanban + agent teams, không drift sang app implementation-first
+- Fixed learning contract:
+  - mỗi chặng phải có **phần lý thuyết cốt lõi** bám docs Hermes để learner hiểu sâu
+  - mỗi chặng phải có **phần lab prompt-first** để learner chỉ đạo Jarvis thực hành đúng lý thuyết đó
+  - learner-facing docs nên bám fixed 5-mục: `Lý thuyết cần nắm` -> `Hiểu sai thường gặp` -> `Prompt lab cho Jarvis` -> `Kết quả mong đợi` -> `Sau lab, từ nay giao gì cho Jarvis`
+  - mục tiêu cuối cùng là learner **học một lần để nắm mental model**, sau đó chuyển sang mode giao việc/cộng tác lâu dài với Jarvis
+  - nếu lab pass, nên ép bước **đóng gói -> tái sử dụng -> chia sẻ** qua checklist, prompt template, handoff note, hoặc skill draft
 - Acceptance criteria:
   - Có entrypoint rõ ràng
   - Có level progression rõ ràng
@@ -41,15 +47,19 @@ Course phải giúp learner đi từ mental model nền tảng tới năng lực
 - Đã ingest docs gốc từ `llms-full.txt` và `llms.txt`
 - Đã viết lại toàn bộ skeleton + level docs + labs + source map
 - Đã cập nhật handoff files (`README.md`, `AGENTS.md`, `BOOTCAMP-STATUS.md`)
+- Đã bổ sung mô tả `About` rõ hơn ở entrypoints để learner thấy ngay repo này là curriculum repo Hermes-first, không phải app repo
 
 ### Current milestone
 - Authored through: **Level 5 + 8 labs + source map**
-- Current phase/sprint/module: **Curriculum rewrite complete (v1.2) + self-study review pass 01 + editorial pass 02 complete**
+- Current phase/sprint/module: **Curriculum rewrite complete (v1.3) + self-study review pass 01 + editorial pass 08 (ASCII mental-model pass) complete**
 - Next file/day/module to use: `docs/index.md`, sau đó learner chọn Level 0/1 hoặc đi thẳng roadmap phù hợp
-- Framing refinement mới nhất: **Jarvis là orchestrator trung tâm** để learner học route/decompose/dispatch rõ ràng hơn
-- Đã thread lại framing Jarvis xuyên suốt từ Level 0 -> Level 5 và Lab 00 -> Lab 05
+- Framing refinement mới nhất: **mỗi chặng học phải có 2 phần song hành — lý thuyết sâu theo docs Hermes và lab prompt-first để learner chỉ đạo Jarvis thực hành; đồng thời Level 0-5 đã được chuẩn hóa về fixed format tóm tắt cuối level**
+- Entry framing hiện cũng nói rõ phần `About`: repo này là curriculum repo để học Hermes/Jarvis workflow dài hạn, không phải repo triển khai Todo App production
+- Lab 00/01/02/02B/03/03B/04/05 hiện đều có mục **Prompt test để copy vào Jarvis** ở đầu file để learner thực hành bằng Hermes Agent thật thay vì chỉ đọc prose hoặc chạy checklist command
+- Jarvis vẫn là orchestrator trung tâm xuyên suốt từ Level 0 -> Level 5 và Lab 00 -> Lab 05
+- ASCII mental model đã được chuẩn hóa thêm trong phần `Lý thuyết cần nắm` của các level/lab để khóa boundary trực quan hơn
 - Self-study progress: **Level 0-5 đã được review xong trong pass 01**
-- Editorial progress: **router, learner-vs-maintainer boundary, và practice guidance đã được review/sync trong pass 02**
+- Editorial progress: **router, learner-vs-maintainer boundary, practice guidance, và framing theory+lab đã được review/sync**
 
 ### Not started
 - Chưa có answer key / sample learner logs

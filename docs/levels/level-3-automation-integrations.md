@@ -264,22 +264,76 @@ Rule học ở đây:
 - đừng gắn quá nhiều capability lên Jarvis trước khi Jarvis có trigger discipline + security boundary + reliability boundary.
 - nếu main model đắt, phải nhớ rằng `auxiliary.auto` thường kéo side tasks dùng cùng model đó.
 
-## Exit criteria
+## Lý thuyết cần nắm
 
-Bạn chỉ coi là qua Level 3 khi tự giải thích được:
+- “Automation” trong Hermes thực ra gồm nhiều primitive khác nhau: cron, hook, webhook, gateway, batch.
+- Hook là lifecycle nội bộ; webhook là inbound event từ bên ngoài; gateway là long-lived front door; batch thiên về data/eval.
+- Messaging gateway là **service + security boundary**, không chỉ là bot trả lời được.
+- MCP, ACP, API Server là 3 kiểu integration khác vai trò kiến trúc.
+- Reliability stack có nhiều lớp: credential pools -> fallback providers -> provider routing/OpenRouter -> auxiliary task routing.
+- Browser/Vision/Voice/TTS là capability expansion mạnh nhưng kéo theo cost và complexity.
 
-- cron vs hook vs webhook vs gateway vs batch,
-- vì sao gateway là service + security boundary,
-- hook khác webhook ở đâu,
-- batch processing dùng cho loại bài toán nào,
-- MCP vs ACP vs API Server,
-- credential pools vs fallback providers vs provider routing vs auxiliary routing,
-- vì sao browser/vision/voice/TTS nên được thêm sau khi operator discipline đã chắc.
 
-## Labs của level này
+### Sơ đồ mental model
 
-- `docs/labs/lab-03-automation-gateway.md`
-- `docs/labs/lab-03b-routing-reliability.md`
+```text
+Use case đến từ đâu?
+        |
+        +--> Theo lịch ------------------> [Cron]
+        |
+        +--> Lifecycle nội bộ Hermes ---> [Hook]
+        |
+        +--> Event từ hệ ngoài ---------> [Webhook]
+        |
+        +--> Người chat với Hermes -----> [Gateway]
+        |
+        +--> Dataset / trajectory batch -> [Batch processing]
+
+Reliability layer chạy ngang:
+[credential pools] -> [fallback providers] -> [auxiliary routing]
+```
+
+## Hiểu sai thường gặp
+
+1. “Cái gì tự động cũng gọi là cron.” -> Sai, trigger primitive phải chọn đúng theo bài toán.
+2. “Hook và webhook chỉ khác tên.” -> Sai, chúng chạm vào hai phía khác nhau của hệ thống.
+3. “Gateway là bot demo.” -> Sai, nó là service runtime có auth, pairing, session store, scheduler.
+4. “MCP/ACP/API Server đều là integration như nhau.” -> Sai, direction và role kiến trúc khác nhau.
+5. “Chọn model xong là reliability ổn.” -> Sai, còn nhiều lớp key rotation, fallback, auxiliary routing.
+
+## Prompt lab cho Jarvis
+
+```text
+Jarvis, hãy đóng vai automation architect cho Level 3.
+
+Mục tiêu:
+- giúp tôi chọn đúng trigger primitive cho từng tình huống,
+- giúp tôi hiểu service/security boundary của gateway,
+- dẫn tôi qua các lab automation và reliability bằng tư duy kiến trúc, không chỉ command syntax.
+
+Cách làm:
+1. Đưa cho tôi 5 tình huống và bắt tôi chọn giữa cron/hook/webhook/gateway/batch.
+2. Dẫn tôi qua `lab-03-automation-gateway.md` và `lab-03b-routing-reliability.md`.
+3. Nếu tôi chọn sai primitive hoặc integration surface, hãy nói rõ tôi đang lẫn boundary nào.
+4. Kết thúc bằng một decision memo ngắn: với hệ thống của tôi, khi nào nên dùng gateway, khi nào nên dùng webhook, khi nào cần fallback/auxiliary tuning.
+```
+
+## Kết quả mong đợi
+
+- Phân biệt đúng cron vs hook vs webhook vs gateway vs batch.
+- Giải thích được vì sao gateway là service + security boundary.
+- Giải thích hook khác webhook ở đâu.
+- Biết batch processing dùng cho loại bài toán nào.
+- Phân biệt MCP vs ACP vs API Server.
+- Phân biệt credential pools vs fallback providers vs provider routing vs auxiliary routing.
+- Biết vì sao browser/vision/voice/TTS nên được thêm sau khi operator discipline đã chắc.
+
+## Sau lab, từ nay giao gì cho Jarvis
+
+- chọn đúng primitive automation cho từng yêu cầu mới,
+- phác thảo gateway/security/reliability architecture trước khi triển khai,
+- audit xem một ý tưởng nên đi qua MCP, ACP, API Server, hay không cần integration mới,
+- đề xuất cấu hình fallback/auxiliary khi workload bắt đầu tốn kém hoặc dễ fail.
 
 ## Next
 

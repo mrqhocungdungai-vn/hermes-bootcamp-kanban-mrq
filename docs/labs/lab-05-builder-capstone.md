@@ -5,14 +5,36 @@
 **Output cuối:** một file brief 1 trang cho capstone bạn chọn.  
 **Khuyến nghị thực hành:** tạo brief trong **fork/local copy** của repo course, hoặc áp brief đó sang practice repo riêng nếu bạn muốn build tiếp trên codebase thật.
 
-## Trước khi bắt đầu
+## Lý thuyết cần nắm
+
+Lab này chuyển bạn từ operator sang builder: chọn primitive trung tâm, chọn extension surface đúng, đọc lại source docs đúng, và viết capstone brief có thể triển khai tiếp. Trọng tâm là quyết định đúng lớp mở rộng chứ không phải nhảy thẳng vào code.
+
+### Sơ đồ mental model
+
+```text
+Capstone decision flow
+
+[Ý tưởng builder]
+      |
+      +--> surface nào đúng? -----> skill / tool / plugin / provider / API / library
+      |
+      +--> source docs nào phải đọc lại?
+      |
+      +--> assumption kỹ thuật nào phải chốt?
+      |
+      +--> brief 1 trang có đủ scope + guardrails + next steps chưa?
+      v
+[Capstone brief đủ mạnh để Jarvis hoặc team triển khai tiếp]
+```
+
+### Trước khi bắt đầu
 
 Lab này không yêu cầu bạn phải code plugin ngay.  
 Nó yêu cầu bạn làm đúng việc khó hơn: **chọn đúng primitive trung tâm** trước khi build.
 
 ---
 
-## Bước 1 — Quan sát command surfaces builder-facing
+### Bước 1 — Quan sát command surfaces builder-facing
 
 Chạy các lệnh sau để nhìn rõ builder surfaces hiện có trên host:
 
@@ -45,7 +67,7 @@ hermes profile --help
 
 ---
 
-## Bước 2 — Chọn một capstone theo primitive trung tâm
+### Bước 2 — Chọn một capstone theo primitive trung tâm
 
 Chọn **1 trong 4** capstone sau.
 
@@ -67,7 +89,7 @@ Chọn **1 trong 4** capstone sau.
 
 ---
 
-## Bước 3 — Chốt “extension surface” đúng
+### Bước 3 — Chốt “extension surface” đúng
 
 Nếu bạn chọn Capstone D, bắt buộc trả lời thêm câu này:
 
@@ -86,7 +108,7 @@ Dùng bảng này:
 
 ---
 
-## Bước 4 — Nếu nghiêng về plugin/memory/local-LLM, hãy viết rõ assumption kỹ thuật
+### Bước 4 — Nếu nghiêng về plugin/memory/local-LLM, hãy viết rõ assumption kỹ thuật
 
 ### Trường hợp 1: bạn nghiêng về plugin
 Phải trả lời:
@@ -111,7 +133,7 @@ Phải trả lời:
 
 ---
 
-## Bước 5 — Chọn source docs phải đọc lại theo capstone
+### Bước 5 — Chọn source docs phải đọc lại theo capstone
 
 ### Nếu chọn Capstone A — Solo Operator
 Đọc lại:
@@ -152,7 +174,7 @@ Phải trả lời:
 
 ---
 
-## Bước 6 — Viết capstone brief 1 trang
+### Bước 6 — Viết capstone brief 1 trang
 
 Tạo file mới từ template này:
 
@@ -182,7 +204,7 @@ Sau đó điền đầy đủ 9 mục sau:
 
 ---
 
-## Bước 7 — Feynman defense
+### Bước 7 — Feynman defense
 
 Tự bảo vệ capstone của bạn bằng 5 câu:
 
@@ -194,7 +216,52 @@ Tự bảo vệ capstone của bạn bằng 5 câu:
 
 ---
 
-## Gợi ý chấm chất lượng brief
+## Hiểu sai thường gặp
+
+- Skill, plugin, built-in tool, local LLM đều là cùng một kiểu “mở rộng Hermes”.
+- Builder giỏi là người code sớm nhất, không cần capstone brief rõ.
+- Local LLM luôn là upgrade miễn phí về privacy/performance.
+- Có ý tưởng capstone là đủ, không cần quay lại docs gốc để khóa boundary.
+
+## Prompt lab cho Jarvis
+
+Paste trực tiếp prompt dưới đây cho Jarvis. Mục tiêu là bạn giữ vai trò định hướng + review, còn Jarvis giữ vai trò orchestration + execution support.
+
+```text
+Jarvis, hãy làm builder mentor cho tôi trong Lab 05.
+
+Objective:
+- giúp tôi chọn đúng capstone theo primitive trung tâm,
+- buộc tôi phân biệt skill vs plugin vs built-in tool vs external system,
+- kết thúc bằng một capstone brief 1 trang đủ rõ để build tiếp.
+
+Context:
+- Tôi đang học Lab 05 — Builder Track và Capstone Design.
+- Tôi muốn chọn capstone dựa trên đúng Hermes primitive, không dựa trên cảm giác “nghe hay”.
+
+Guardrails:
+- đừng để tôi ôm quá nhiều primitive trong một capstone,
+- nếu tôi chọn sai extension surface, phải chỉ rõ vì sao,
+- buộc tôi nói rõ failure mode và exit criteria,
+- nếu dùng path/project example, nhắc tôi thay bằng repo thật của tôi.
+
+Deliverables:
+- một capstone brief 1 trang đủ rõ trong `docs/capstones/`,
+- một giải thích ngắn vì sao primitive trung tâm được chọn và vì sao không chọn primitive khác làm core,
+- một reading list ngắn: docs gốc nào phải đọc lại trước khi build thật.
+
+Quality standard:
+- capstone chỉ được có 1 primitive trung tâm rõ ràng,
+- nếu có extension surface thì phải gọi đúng tên: skill, plugin, built-in tool, hay external system,
+- brief phải nói rõ failure mode đầu tiên và exit criteria,
+- không được để capstone trôi thành wishlist gom nhiều primitive không có boundary.
+```
+
+## Kết quả mong đợi
+
+Nếu lab đi đúng hướng, bạn phải nhìn được output đủ cụ thể để tự đối chiếu lại bằng phần lý thuyết vừa học.
+
+### Gợi ý chấm chất lượng brief
 
 Brief tốt khi:
 - không lẫn giữa **feature phụ** và **primitive trung tâm**,
@@ -211,7 +278,7 @@ Brief chưa tốt khi:
 
 ---
 
-## Success criteria
+### Success criteria
 
 Bạn hoàn thành Lab 05 khi:
 - chọn được **1 capstone rõ ràng**,
@@ -220,7 +287,28 @@ Bạn hoàn thành Lab 05 khi:
 - tạo được file brief trong `docs/capstones/`,
 - biết phải quay lại docs gốc nào trước khi build thật.
 
-## Sau lab này
+### Dấu hiệu cần reject hoặc làm lại
+
+- brief vẫn mơ hồ kiểu “xây một Hermes mạnh hơn”
+- gom quá nhiều primitive vào cùng một capstone mà không có core rõ ràng
+- không phân biệt skill, plugin, built-in tool, external system
+- không nói ra được artifact cuối, failure mode đầu tiên, hoặc exit criteria
+
+## Sau lab, từ nay giao gì cho Jarvis
+
+Từ nay, hãy giao cho Jarvis việc biến một ý tưởng builder thành capstone brief có source docs, guardrails, assumptions, và next steps rõ ràng. Khi qua lab này, hãy yêu cầu Jarvis đóng gói blueprint đó thành reusable template/playbook để bạn dùng lại và publish/share nếu phù hợp.
+
+### Prompt đóng gói để dùng lại
+
+```text
+Jarvis, dựa trên lab tôi vừa hoàn thành, hãy làm 4 việc:
+1. Tóm tắt boundary/mental model cốt lõi tôi vừa học bằng tiếng Việt ngắn gọn.
+2. Rút workflow vừa làm thành một prompt template hoặc checklist tái sử dụng.
+3. Chỉ ra 3 pitfalls dễ lặp lại nhất và cách tự kiểm lại output.
+4. Viết một handoff note ngắn để lần sau tôi hoặc người khác có thể dùng lại mà không phải học lại từ đầu.
+```
+
+### Sau lab này
 
 Nếu bạn chọn:
 - **Capstone A** -> quay lại Level 2-3 để harden stack cá nhân
